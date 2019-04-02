@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <v-app>
     <TopMenu/>
     <!--Main content-->
-    <div class="main-content">
+    <v-content>
       <!--list wrapper-->
       <Hero/>
       <div class="list-wrapper">
@@ -28,10 +28,10 @@
         <!--news items-->
       </div>
       <!--end list wrapper-->
-    </div>
+    </v-content>
     <!--End main content-->
     <Footer/>
-  </div>
+  </v-app>
 </template>
 
 <script>
