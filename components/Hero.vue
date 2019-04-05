@@ -10,11 +10,16 @@
         style="font-weight: bold"
       >Color Me Run 2019, Full Stack or DevOps, VIETNAM CHAMPIONSHIP...</span>
     </p>
+    <InputSearch/>
   </div>
 </template>
 
 <script>
+import InputSearch from "@/components/InputSearch";
 export default {
+  components: {
+    InputSearch
+  },
   data: () => ({
     dropdown_font: ["Arial", "Calibri", "Courier", "Verdana"],
     dropdown_icon: [
