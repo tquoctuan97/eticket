@@ -3,13 +3,63 @@
     <TopMenu/>
     <!--Main content-->
     <v-content class="main-content">
-      <!--list wrapper-->
       <Hero/>
+      <!--list wrapper-->
       <div class="title-box center">
         <h3>Popular Events</h3>
         <a href="#">See more</a>
       </div>
       <div class="list-wrapper center">
+        <!--news items-->
+        <div class="post-card" v-for="post in posts" :key="post.id">
+          <nuxt-link :to="'/'+ post.id ">
+            <div
+              :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
+              class="post-card__thumbnai"
+            >
+              <div class="post-read-more">Read More</div>
+              <div class="overlay"></div>
+            </div>
+          </nuxt-link>
+          <nuxt-link :to="'/'+ post.id ">
+            <div class="post-card__title">{{ post.title }}</div>
+          </nuxt-link>
+          <p class="post-card__des">{{ post.created_at.date }}</p>
+        </div>
+        <!--news items-->
+      </div>
+      <!--end list wrapper-->
+      <!--list wrapper-->
+      <div class="title-box center">
+        <h3>Upcomming in week</h3>
+        <a href="#">See more</a>
+      </div>
+      <div class="list-wrapper">
+        <!--news items-->
+        <div class="post-card" v-for="post in posts" :key="post.id">
+          <nuxt-link :to="'/'+ post.id ">
+            <div
+              :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
+              class="post-card__thumbnai"
+            >
+              <div class="post-read-more">Read More</div>
+              <div class="overlay"></div>
+            </div>
+          </nuxt-link>
+          <nuxt-link :to="'/'+ post.id ">
+            <div class="post-card__title">{{ post.title }}</div>
+          </nuxt-link>
+          <p class="post-card__des">{{ post.created_at.date }}</p>
+        </div>
+        <!--news items-->
+      </div>
+      <!--end list wrapper-->
+      <!--list wrapper-->
+      <div class="title-box center">
+        <h3>Free Entry</h3>
+        <a href="#">See more</a>
+      </div>
+      <div class="list-wrapper">
         <!--news items-->
         <div class="post-card" v-for="post in posts" :key="post.id">
           <nuxt-link :to="'/'+ post.id ">
@@ -55,7 +105,7 @@ export default {
 
   async asyncData() {
     const { data } = await axios.get(
-      "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event?limit=4&page=1"
+      "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event?limit=3&page=1"
     );
     return { posts: data.data };
   }
@@ -70,21 +120,17 @@ a {
 body {
   font-family: "Roboto", sans-serif;
 }
-.center {
-  width: 1440px;
-  margin: 0 auto;
-}
 .main-content {
   width: 100%;
   min-height: 100vh;
-  background: #fff;
+  background: #eeeeee;
 }
 .title-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 20px 40px;
+  margin-top: 40px;
 }
 
 .title-box h3 {
@@ -96,7 +142,7 @@ body {
   flex-wrap: wrap;
 }
 .post-card {
-  width: calc(23%);
+  width: calc(31%);
   margin: auto;
   height: auto;
   border: 1px solid rgba(#000, 0.08);
