@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import InputSearch from "@/components/InputSearch";
+import InputSearch from "@/components/elements/InputSearch";
 export default {
   components: {
     InputSearch

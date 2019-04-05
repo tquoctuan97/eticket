@@ -2,10 +2,14 @@
   <v-app>
     <TopMenu/>
     <!--Main content-->
-    <v-content>
+    <v-content class="main-content">
       <!--list wrapper-->
       <Hero/>
-      <div class="list-wrapper">
+      <div class="title-box center">
+        <h3>Popular Events</h3>
+        <a href="#">See more</a>
+      </div>
+      <div class="list-wrapper center">
         <!--news items-->
         <div class="post-card" v-for="post in posts" :key="post.id">
           <nuxt-link :to="'/'+ post.id ">
@@ -13,9 +17,6 @@
               :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
               class="post-card__thumbnai"
             >
-              <div class="post-card__time">
-                <span>{{ post.created_at.date }}</span>
-              </div>
               <div class="post-read-more">Read More</div>
               <div class="overlay"></div>
             </div>
@@ -23,7 +24,7 @@
           <nuxt-link :to="'/'+ post.id ">
             <div class="post-card__title">{{ post.title }}</div>
           </nuxt-link>
-          <p class="post-card__des">{{ post.address }}</p>
+          <p class="post-card__des">{{ post.created_at.date }}</p>
         </div>
         <!--news items-->
       </div>
@@ -35,9 +36,9 @@
 </template>
 
 <script>
-import TopMenu from "@/components/TopMenu";
-import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
+import TopMenu from "@/components/containers/TopMenu";
+import Footer from "@/components/containers/Footer";
+import Hero from "@/components/containers/Hero";
 import axios from "axios";
 export default {
   components: {
@@ -54,7 +55,7 @@ export default {
 
   async asyncData() {
     const { data } = await axios.get(
-      "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event?limit=10&page=1"
+      "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event?limit=4&page=1"
     );
     return { posts: data.data };
   }
@@ -62,24 +63,40 @@ export default {
 </script>
 
 <style>
+a {
+  text-decoration: none;
+  color: gray;
+}
 body {
   font-family: "Roboto", sans-serif;
+}
+.center {
+  width: 1440px;
+  margin: 0 auto;
 }
 .main-content {
   width: 100%;
   min-height: 100vh;
-  float: left;
-  background: #f5f5f5;
+  background: #fff;
+}
+.title-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.title-box h3 {
+  font-size: 32px;
 }
 .list-wrapper {
-  width: 100%;
-  float: left;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 .post-card {
-  width: calc(31%);
+  width: calc(23%);
   margin: auto;
   height: auto;
   border: 1px solid rgba(#000, 0.08);

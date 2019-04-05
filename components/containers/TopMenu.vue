@@ -1,7 +1,9 @@
 <template>
-  <v-toolbar app color="white">
+  <v-toolbar app color="white" style="z-index:999">
     <v-toolbar-title style="border-right: 0.25px solid #eee; padding-right:20px;">
-      <img width="120" src="/logo-eticket.png">
+      <a href="/">
+        <img width="120" src="/logo-eticket.png">
+      </a>
     </v-toolbar-title>
     <v-menu :nudge-width="100">
       <template v-slot:activator="{ on }">
@@ -27,7 +29,7 @@
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat>For Event Organizer</v-btn>
-      <v-btn flat>
+      <v-btn flat href="/sign-in">
         Sign In
         <v-icon right>account_circle</v-icon>
       </v-btn>
@@ -60,4 +62,9 @@ export default {
 </script>
 
 <style>
+.v-toolbar__content {
+  width: 1440px;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+}
 </style>

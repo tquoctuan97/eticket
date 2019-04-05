@@ -1,16 +1,16 @@
 <template>
   <div>
-    <Aside/>
+    <TopMenu/>
     <h1 style="text-align:center; margin-top: 40px;">This is User page</h1>
   </div>
 </template>
 
 <script>
-import Aside from "~/components/Aside";
+import TopMenu from "~/components/containers/TopMenu";
 
 export default {
   components: {
-    Aside
+    TopMenu
   }
 };
 </script>
