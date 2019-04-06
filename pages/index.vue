@@ -7,7 +7,10 @@
       <!--list wrapper-->
       <div class="title-box center">
         <h3>Popular Events</h3>
-        <a href="#">See more</a>
+        <a class="box-see-more" href="#">
+          <span>See more</span>
+          <v-icon>navigate_next</v-icon>
+        </a>
       </div>
       <div class="list-wrapper center">
         <!--news items-->
@@ -32,9 +35,12 @@
       <!--list wrapper-->
       <div class="title-box center">
         <h3>Upcomming in week</h3>
-        <a href="#">See more</a>
+        <a class="box-see-more" href="#">
+          <span>See more</span>
+          <v-icon>navigate_next</v-icon>
+        </a>
       </div>
-      <div class="list-wrapper">
+      <div class="list-wrapper center">
         <!--news items-->
         <div class="post-card" v-for="post in posts" :key="post.id">
           <nuxt-link :to="'/'+ post.id ">
@@ -57,9 +63,12 @@
       <!--list wrapper-->
       <div class="title-box center">
         <h3>Free Entry</h3>
-        <a href="#">See more</a>
+        <a class="box-see-more" href="#">
+          <span>See more</span>
+          <v-icon>navigate_next</v-icon>
+        </a>
       </div>
-      <div class="list-wrapper">
+      <div class="list-wrapper center">
         <!--news items-->
         <div class="post-card" v-for="post in posts" :key="post.id">
           <nuxt-link :to="'/'+ post.id ">
@@ -79,6 +88,49 @@
         <!--news items-->
       </div>
       <!--end list wrapper-->
+      <div class="title-box center">
+        <h3>Event Category</h3>
+        <a class="box-see-more" href="#">
+          <span>See more</span>
+          <v-icon>navigate_next</v-icon>
+        </a>
+      </div>
+      <div class="list-wrapper center">
+        <!--news items-->
+        <div class="category_item">
+          <img class="image-items" src="/ic_category/ic_music.png">
+          <p>Music</p>
+        </div>
+        <div class="category_item">
+          <img class="image-items" src="/ic_category/ic_arts.png">
+          <p>Arts</p>
+        </div>
+        <div class="category_item">
+          <img class="image-items" src="/ic_category/ic_business.png">
+          <p>Business</p>
+        </div>
+        <div class="category_item">
+          <img class="image-items" src="/ic_category/ic_parties.png">
+          <p>Parties</p>
+        </div>
+        <div class="category_item">
+          <img class="image-items" src="/ic_category/ic_classes.png">
+          <p>Classes</p>
+        </div>
+        <div class="category_item">
+          <img class="image-items" src="/ic_category/ic_sport.png">
+          <p>Sport</p>
+        </div>
+        <div class="category_item">
+          <img class="image-items" src="/ic_category/ic_food.png">
+          <p>Food</p>
+        </div>
+        <div class="category_item">
+          <img class="image-items" src="/ic_category/ic_event_other.png">
+          <p>Other</p>
+        </div>
+        <!--news items-->
+      </div>
     </v-content>
     <!--End main content-->
     <Footer/>
@@ -123,18 +175,29 @@ body {
 .main-content {
   width: 100%;
   min-height: 100vh;
-  background: #eeeeee;
+  background: #fff;
+}
+.center {
+  width: 1440px;
+  margin: 0 auto;
 }
 .title-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 40px;
+  padding: 20px 20px;
   margin-top: 40px;
 }
 
 .title-box h3 {
   font-size: 32px;
+}
+
+.box-see-more {
+  font-size: 17px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
 }
 .list-wrapper {
   display: flex;
@@ -226,6 +289,24 @@ body {
 .post-card__thumbnai:hover .post-read-more {
   top: 150px;
   transition: all ease-in 0.3s;
+}
+/* Event Category */
+.category_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+.category_item p {
+  margin-top: 20px;
+  font-size: 17px;
+  font-weight: 500;
+}
+.image-items {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
 }
 
 @media (max-width: 768px) {
