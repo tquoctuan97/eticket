@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar app color="white" style="z-index:999">
+  <v-toolbar color="white" style="z-index:999">
     <v-toolbar-title style="border-right: 0.25px solid #eee; padding-right:20px;">
       <a href="/">
         <img width="120" src="/logo-eticket.png">
@@ -61,10 +61,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .v-toolbar__content {
   font-family: "Roboto", sans-serif;
-  width: 1440px;
-  margin: 0 auto;
+  width: 1440px!important;
+  margin: 0 auto!important;
 }
 </style>
