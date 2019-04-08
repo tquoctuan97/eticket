@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <TopMenu/>
     <!--Main content-->
     <v-content class="main-content">
       <Hero/>
@@ -91,21 +90,16 @@
       <EventCategory/>
     </v-content>
     <!--End main content-->
-    <Footer/>
   </v-app>
 </template>
 
 <script>
-import TopMenu from "@/components/containers/TopMenu";
-import Footer from "@/components/containers/Footer";
 import Hero from "@/components/containers/Hero";
 import EventCategory from "@/components/containers/EventCategory.vue";
 import axios from "axios";
 export default {
   components: {
-    TopMenu,
     Hero,
-    Footer,
     EventCategory
   },
   async asyncData() {
@@ -118,13 +112,6 @@ export default {
 </script>
 
 <style>
-a {
-  text-decoration: none;
-  color: gray;
-}
-body {
-  font-family: "Roboto", sans-serif;
-}
 .main-content {
   width: 100%;
   min-height: 100vh;

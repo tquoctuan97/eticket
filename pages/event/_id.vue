@@ -1,9 +1,7 @@
 <template>
   <v-app>
-    <TopMenu/>
-
-    <div v-if="events.length">
-      <div v-for="event in events" :key="event.id">
+    <div>
+      <div>
         <div
           :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + event.imageURL +')'}"
           class="hero-img"
@@ -73,22 +71,13 @@
         </div>
       </div>
     </div>
-    <p v-else>No items found.</p>
-
-    <Footer/>
   </v-app>
 </template>
  
 <script>
-import TopMenu from "@/components/containers/TopMenu";
-import Footer from "@/components/containers/Footer";
 import axios from "axios";
 
 export default {
-  components: {
-    TopMenu,
-    Footer
-  },
   demo: [
     {
       id: 6,
@@ -125,10 +114,15 @@ export default {
       const { data } = await axios.get(
         `https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-by-id?event_id=${+params.id}`
       );
-      return { events: data.data };
+      return { event: data.data[0] };
     } catch (e) {
       error({ message: "Không tìm thấy event", statusCode: 404 });
     }
+  },
+  head() {
+    return {
+      title: this.event.title
+    };
   }
 };
 </script>
