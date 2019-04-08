@@ -15,7 +15,7 @@
       <div class="list-wrapper center">
         <!--news items-->
         <div class="post-card" v-for="post in posts" :key="post.id">
-          <nuxt-link :to="'/'+ post.id ">
+          <nuxt-link :to="'/event/'+ post.id ">
             <div
               :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
               class="post-card__thumbnai"
@@ -24,7 +24,7 @@
               <div class="overlay"></div>
             </div>
           </nuxt-link>
-          <nuxt-link :to="'/'+ post.id ">
+          <nuxt-link :to="'/event/'+ post.id ">
             <div class="post-card__title">{{ post.title }}</div>
           </nuxt-link>
           <p class="post-card__des">{{ post.created_at.date }}</p>
@@ -43,7 +43,7 @@
       <div class="list-wrapper center">
         <!--news items-->
         <div class="post-card" v-for="post in posts" :key="post.id">
-          <nuxt-link :to="'/'+ post.id ">
+          <nuxt-link :to="'/event/'+ post.id ">
             <div
               :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
               class="post-card__thumbnai"
@@ -52,7 +52,7 @@
               <div class="overlay"></div>
             </div>
           </nuxt-link>
-          <nuxt-link :to="'/'+ post.id ">
+          <nuxt-link :to="'/event/'+ post.id ">
             <div class="post-card__title">{{ post.title }}</div>
           </nuxt-link>
           <p class="post-card__des">{{ post.created_at.date }}</p>
@@ -71,7 +71,7 @@
       <div class="list-wrapper center">
         <!--news items-->
         <div class="post-card" v-for="post in posts" :key="post.id">
-          <nuxt-link :to="'/'+ post.id ">
+          <nuxt-link :to="'/event/'+ post.id ">
             <div
               :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
               class="post-card__thumbnai"
@@ -80,7 +80,7 @@
               <div class="overlay"></div>
             </div>
           </nuxt-link>
-          <nuxt-link :to="'/'+ post.id ">
+          <nuxt-link :to="'/event/'+ post.id ">
             <div class="post-card__title">{{ post.title }}</div>
           </nuxt-link>
           <p class="post-card__des">{{ post.created_at.date }}</p>
@@ -108,13 +108,6 @@ export default {
     Footer,
     EventCategory
   },
-
-  data() {
-    return {
-      urlAddress: "https://eticket-vhu.herokuapp.com"
-    };
-  },
-
   async asyncData() {
     const { data } = await axios.get(
       "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event?limit=3&page=1"

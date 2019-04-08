@@ -64,5 +64,7 @@ export default {
 <style>
 .v-toolbar__content {
   font-family: "Roboto", sans-serif;
+  width: 1440px;
+  margin: 0 auto;
 }
 </style>
