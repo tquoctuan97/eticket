@@ -88,49 +88,7 @@
         <!--news items-->
       </div>
       <!--end list wrapper-->
-      <div class="title-box center">
-        <h3>Event Category</h3>
-        <a class="box-see-more" href="#">
-          <span>See more</span>
-          <v-icon>navigate_next</v-icon>
-        </a>
-      </div>
-      <div class="list-wrapper center">
-        <!--news items-->
-        <div class="category_item">
-          <img class="image-items" src="/ic_category/ic_music.png">
-          <p>Music</p>
-        </div>
-        <div class="category_item">
-          <img class="image-items" src="/ic_category/ic_arts.png">
-          <p>Arts</p>
-        </div>
-        <div class="category_item">
-          <img class="image-items" src="/ic_category/ic_business.png">
-          <p>Business</p>
-        </div>
-        <div class="category_item">
-          <img class="image-items" src="/ic_category/ic_parties.png">
-          <p>Parties</p>
-        </div>
-        <div class="category_item">
-          <img class="image-items" src="/ic_category/ic_classes.png">
-          <p>Classes</p>
-        </div>
-        <div class="category_item">
-          <img class="image-items" src="/ic_category/ic_sport.png">
-          <p>Sport</p>
-        </div>
-        <div class="category_item">
-          <img class="image-items" src="/ic_category/ic_food.png">
-          <p>Food</p>
-        </div>
-        <div class="category_item">
-          <img class="image-items" src="/ic_category/ic_event_other.png">
-          <p>Other</p>
-        </div>
-        <!--news items-->
-      </div>
+      <EventCategory/>
     </v-content>
     <!--End main content-->
     <Footer/>
@@ -141,12 +99,14 @@
 import TopMenu from "@/components/containers/TopMenu";
 import Footer from "@/components/containers/Footer";
 import Hero from "@/components/containers/Hero";
+import EventCategory from "@/components/containers/EventCategory.vue";
 import axios from "axios";
 export default {
   components: {
     TopMenu,
     Hero,
-    Footer
+    Footer,
+    EventCategory
   },
 
   data() {
