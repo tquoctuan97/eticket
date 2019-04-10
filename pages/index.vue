@@ -13,7 +13,7 @@
       </div>
       <div class="list-wrapper center">
         <!--news items-->
-        <div class="post-card" v-for="post in posts" :key="post.id">
+        <div class="post-card elevation-1" v-for="post in posts" :key="post.id">
           <nuxt-link :to="'/event/'+ post.id ">
             <div
               :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
