@@ -7,7 +7,7 @@
         <v-icon>navigate_next</v-icon>
       </a>
     </div>
-    <div class="list-wrapper center">
+    <div class="list-wrapper center" style="justify-content: space-between">
       <!--news items-->
       <div class="category_item">
         <img class="image-items" src="/ic_category/ic_music.png">

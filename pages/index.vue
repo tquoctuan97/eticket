@@ -13,7 +13,7 @@
       </div>
       <div class="list-wrapper center">
         <!--news items-->
-        <div class="post-card elevation-1" v-for="post in posts" :key="post.id">
+        <div class="post-card" v-for="post in posts" :key="post.id">
           <nuxt-link :to="'/event/'+ post.id ">
             <div
               :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
@@ -26,7 +26,14 @@
           <nuxt-link :to="'/event/'+ post.id ">
             <div class="post-card__title">{{ post.title }}</div>
           </nuxt-link>
-          <p class="post-card__des">{{ post.created_at.date }}</p>
+          <p class="post-card__des">{{ post.start_date}} - {{post.start_time}}:00</p>
+          <div class="post-card__further mt-3">
+            <p class="post-card__category d-inline-block mr-2">{{post.category}}</p>
+            <p
+              class="post-card__price d-inline-block"
+              style="border-color: rgba(255, 77, 0, 0.87); color:#FF4D00;"
+            >From {{post.tickettype.data[0].price}}</p>
+          </div>
         </div>
         <!--news items-->
       </div>
@@ -141,7 +148,7 @@ export default {
 }
 .list-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 .post-card {
@@ -153,6 +160,13 @@ export default {
   margin: 1%;
   background: #fff;
   overflow: hidden;
+}
+.post-card:hover {
+  transition: 0.3s all ease-in-out;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
+  border-radius: 9px;
 }
 .post-card .overlay {
   position: absolute;
@@ -170,14 +184,15 @@ export default {
   background-position: center;
   background-size: cover;
   width: 100%;
-  height: 300px;
+  height: 200px;
   position: relative;
+  border-radius: 5px;
 }
 .post-card__title {
   font-size: 20px;
   width: 100%;
   float: left;
-  margin: 30px 0 20px 0;
+  margin: 30px 0 10px 0;
   color: #000;
 }
 .post-card__time {
@@ -230,6 +245,15 @@ export default {
   top: 150px;
   transition: all ease-in 0.3s;
 }
+.post-card__further p {
+  border: 0.5px solid rgba(112, 112, 112, 0.5);
+  border-radius: 3px;
+  font-size: 12px;
+  padding: 4px 8px;
+  user-select: none;
+  cursor: pointer;
+}
+
 /* Event Category */
 .category_item {
   display: flex;
