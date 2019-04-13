@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <h1 style="text-align:center; margin-top: 40px;">This is User page</h1>
-  </div>
+  <v-layout align-center justify-center>
+    <SigninForm/>
+  </v-layout>
 </template>
 
 <script>
-import TopMenu from "~/components/containers/TopMenu";
+import SigninForm from "~/components/elements/SigninForm";
 
-export default {};
+export default {
+  components: {
+    SigninForm
+  }
+};
 </script>
 
 <style>
