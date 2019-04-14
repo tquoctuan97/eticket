@@ -3,15 +3,15 @@
     <v-container fluid fill-height>
       <v-layout align-center justify-center column>
         <v-card align-center justify-center max-width="500" class="pa-5">
-          <v-card-title primary-title>
-            <h1 class="headline" style="color: green;">Successful account activation</h1>
-          </v-card-title>
-          <v-card-text>
-            <p>You will go to the login page after 5s</p>
-          </v-card-text>
+          <v-layout align-center justify-center>
+            <v-card-title primary-title>
+              <h3 class="headline" style="color: green;">Successful account activation</h3>
+              <p class="subheading">Thank you for registering eticket account.</p>
+            </v-card-title>
+          </v-layout>
           <v-layout align-center justify-center>
             <v-card-actions>
-              <v-btn color="green" dark depressed>Sign In now</v-btn>
+              <v-btn color="green" dark depressed href="/sign-in">Sign In now</v-btn>
             </v-card-actions>
           </v-layout>
         </v-card>
@@ -21,7 +21,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      setTimeCountDown: 5
+    };
+  },
+  computed: {
+    countdown() {
+      if (this.setTimeCountDown > 0) {
+        var time;
+        return (time = setInterval(this.setTimeCountDown - 1, 1000));
+      }
+    }
+  }
+};
 </script>
 
 <style scoped>
