@@ -7,10 +7,15 @@
           class="hero-img"
         ></div>
         <div class="event__content">
-          <div>
-            <h1>{{ event.title }}</h1>
-            <p>By {{event.owner }}</p>
-          </div>
+          <v-layout>
+            <v-flex>
+              <h1>{{ event.title }}</h1>
+              <p>By {{event.owner }}</p>
+            </v-flex>
+            <v-flex flex-end>
+              <v-btn color="primary">Buy Tickets Now</v-btn>
+            </v-flex>
+          </v-layout>
           <div class="event__information">
             <div class="event__information__item">
               <v-icon left>calendar_today</v-icon>
@@ -23,7 +28,7 @@
               <v-icon left>location_city</v-icon>
               <div>
                 <p>{{event.locationName }}</p>
-                <p>{{event.address }}</p>
+                <p>{{event.address}}</p>
               </div>
             </div>
             <div class="event__information__item">
@@ -35,16 +40,48 @@
             </div>
           </div>
           <div class="event__action">
-            <div class="event__action__item">
-              <v-icon>favorite_border</v-icon>
-              <span>Like</span>
-            </div>
-            <div class="event__action__item">
+            <v-btn flat color class="event__action__item" @click="onClickLike">
+              <v-icon v-if="isLike">favorite_border</v-icon>
+              <v-icon v-else>favorite</v-icon>
+              <span v-if="isLike">Like</span>
+              <span v-else>Liked</span>
+            </v-btn>
+            <div class="event__action__item" @click.stop="dialog = true">
               <v-icon>share</v-icon>
               <span>Share</span>
+              <v-dialog v-model="dialog" max-width="400">
+                <v-card style="padding: 20px">
+                  <v-card-title class="headline">Share with freind</v-card-title>
+                  <v-text-field
+                    solo
+                    :value="'http://localhost:3000/event/' + event.id"
+                    outline
+                    readonly
+                    autofocus
+                    flat
+                    append-icon="file_copy"
+                  ></v-text-field>
+                  <v-card-text>
+                    <v-btn fab dark color="indigo">
+                      <v-icon dark>add</v-icon>
+                    </v-btn>
+                  </v-card-text>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn color="green darken-1" flat="flat" @click="dialog = false">Close</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </div>
             <div class="event__action__item">
-              <v-icon>directions</v-icon>
+              <a
+                target="_blank"
+                :href="'https://www.google.com/maps/search/?api=1&query='+event.address"
+              >
+                <v-icon>directions</v-icon>
+              </a>
               <span>Directions</span>
             </div>
             <div class="event__action__item">
@@ -106,6 +143,17 @@ export default {
       }
     }
   ],
+  data() {
+    return {
+      isLike: false,
+      dialog: false
+    };
+  },
+  methods: {
+    onClickLike() {
+      return (this.isLike = !this.isLike);
+    }
+  },
   validate({ params }) {
     return !isNaN(+params.id);
   },
@@ -160,7 +208,10 @@ body {
 
 .event__action__item {
   display: flex;
+  width: calc(25%);
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .event__information__item {
