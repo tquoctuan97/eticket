@@ -61,7 +61,14 @@
           <nuxt-link :to="'/event/'+ post.id ">
             <div class="post-card__title">{{ post.title }}</div>
           </nuxt-link>
-          <p class="post-card__des">{{ post.created_at.date }}</p>
+          <p class="post-card__des">{{ post.start_date}} - {{post.start_time}}:00</p>
+          <div class="post-card__further mt-3">
+            <p class="post-card__category d-inline-block mr-2">{{post.category}}</p>
+            <p
+              class="post-card__price d-inline-block"
+              style="border-color: rgba(255, 77, 0, 0.87); color:#FF4D00;"
+            >From {{post.tickettype.data[0].price}}</p>
+          </div>
         </div>
         <!--news items-->
       </div>
@@ -89,7 +96,14 @@
           <nuxt-link :to="'/event/'+ post.id ">
             <div class="post-card__title">{{ post.title }}</div>
           </nuxt-link>
-          <p class="post-card__des">{{ post.created_at.date }}</p>
+          <p class="post-card__des">{{ post.start_date}} - {{post.start_time}}:00</p>
+          <div class="post-card__further mt-3">
+            <p class="post-card__category d-inline-block mr-2">{{post.category}}</p>
+            <p
+              class="post-card__price d-inline-block"
+              style="border-color: rgba(255, 77, 0, 0.87); color:#FF4D00;"
+            >From {{post.tickettype.data[0].price}}</p>
+          </div>
         </div>
         <!--news items-->
       </div>
@@ -114,6 +128,11 @@ export default {
       "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event?limit=3&page=1"
     );
     return { posts: data.data };
+  },
+  head() {
+    return {
+      title: "Home"
+    };
   }
 };
 </script>
@@ -190,6 +209,7 @@ export default {
 }
 .post-card__title {
   font-size: 20px;
+  height: 60px;
   width: 100%;
   float: left;
   margin: 30px 0 10px 0;
