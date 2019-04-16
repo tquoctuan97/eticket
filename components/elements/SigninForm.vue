@@ -40,6 +40,7 @@
         </v-form>
       </v-card-text>
       <v-card-actions>
+        <v-btn flat nuxt to="account/sign-up">Sign up</v-btn>
         <v-spacer></v-spacer>
         <v-btn color="primary">Login</v-btn>
       </v-card-actions>

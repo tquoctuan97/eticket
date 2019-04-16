@@ -41,9 +41,9 @@
       <v-toolbar-side-icon class="hidden-md-and-up" @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
 
       <v-toolbar-title style="border-right: 0.25px solid #eee; padding-right:20px;">
-        <a href="/">
+        <nuxt-link to="/">
           <img width="120" src="/logo-eticket.png">
-        </a>
+        </nuxt-link>
       </v-toolbar-title>
       <v-menu :nudge-width="100">
         <template v-slot:activator="{ on }">
@@ -69,7 +69,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-md-and-down">
         <v-btn flat>For Event Organizer</v-btn>
-        <v-btn flat href="/sign-in">
+        <v-btn flat to="/sign-in" nuxt>
           Sign In
           <v-icon right>account_circle</v-icon>
         </v-btn>
