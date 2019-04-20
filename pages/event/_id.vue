@@ -6,100 +6,21 @@
       class="hero-img"
       fluid
     ></v-container>
-    <v-container style="background-color:white">
-      <v-layout wrap>
-        <v-flex xs12 lg8>
-          <h1 class="display-2 font-weight-medium">{{ event.title }}</h1>
-          <p class="subheading">By {{event.owner }}</p>
-        </v-flex>
-        <v-flex xs12 lg4>
-          <v-btn color="primary">Buy Tickets Now</v-btn>
-        </v-flex>
-      </v-layout>
+    <div
+      class="mb-5"
+      style="background-color:white;   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);"
+    >
+      <v-container>
+        <v-layout wrap>
+          <v-flex xs12 lg8>
+            <h1 class="display-2 font-weight-medium">{{ event.title }}</h1>
+            <p class="subheading">By {{event.owner }}</p>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </div>
 
-      <v-layout class="border">
-        <v-flex lg4>
-          <v-btn flat color class="event__action__item" @click="onClickLike">
-            <v-icon v-if="isLike">favorite_border</v-icon>
-            <v-icon v-else>favorite</v-icon>
-            <span v-if="isLike">Like</span>
-            <span v-else>Liked</span>
-          </v-btn>
-        </v-flex>
-        <v-flex lg4>
-          <div class="event__action__item" @click.stop="dialog = true">
-            <v-icon>share</v-icon>
-            <span>Share</span>
-            <v-dialog v-model="dialog" max-width="400">
-              <v-card style="padding: 20px">
-                <v-card-title class="headline">Share with freind</v-card-title>
-                <v-text-field
-                  solo
-                  :value="'http://localhost:3000/event/' + event.id"
-                  outline
-                  readonly
-                  autofocus
-                  flat
-                  append-icon="file_copy"
-                ></v-text-field>
-                <v-card-text>
-                  <v-btn fab dark color="indigo">
-                    <v-icon dark>add</v-icon>
-                  </v-btn>
-                </v-card-text>
-
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-
-                  <v-btn color="green darken-1" flat="flat" @click="dialog = false">Close</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </div>
-        </v-flex>
-        <v-flex lg4>
-          <div class="event__action__item">
-            <a
-              target="_blank"
-              :href="'https://www.google.com/maps/search/?api=1&query='+event.address"
-            >
-              <v-icon>directions</v-icon>
-            </a>
-            <span>Directions</span>
-          </div>
-        </v-flex>
-        <v-flex lg4>
-          <div class="event__action__item">
-            <v-icon>more_horiz</v-icon>
-            <span>More</span>
-          </div>
-        </v-flex>
-      </v-layout>
-
-      <div class="event__information">
-        <div class="event__information__item">
-          <v-icon left>calendar_today</v-icon>
-          <div>
-            <p>{{event.start_date}}</p>
-            <p>{{event.start_time}}:00 - {{event.end_time}}:00</p>
-          </div>
-        </div>
-        <div class="event__information__item">
-          <v-icon left>location_city</v-icon>
-          <div>
-            <p>{{event.locationName }}</p>
-            <p>{{event.address}}</p>
-          </div>
-        </div>
-        <div class="event__information__item">
-          <v-icon left>shopping_cart</v-icon>
-          <div>
-            <p>$14 - $20</p>
-            <p>Pay free tickets within 3 days before the event</p>
-          </div>
-        </div>
-      </div>
-    </v-container>
     <v-container grid-list-lg>
       <v-layout>
         <v-flex lg8>
@@ -119,7 +40,8 @@
             <v-expansion-panel>
               <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
                 <template v-slot:header>
-                  <div>Item</div>
+                  <div>Common Ticket</div>
+                  <div style="text-align: right; font-weight: bold">$400</div>
                 </template>
                 <v-card>
                   <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
@@ -131,14 +53,103 @@
           <v-card class="mb-5">
             <v-card-title class="headline">Contact</v-card-title>
             <v-divider></v-divider>
-            <h4>{{event.contactPerson}}</h4>
-            <h4>{{event.contactNumber}}</h4>
+            <v-card-text>
+              <p>
+                <span>{{event.contactPerson}}</span>
+              </p>
+              <v-btn flat :href="'tel:'+event.contactNumber">
+                <v-icon left>phone</v-icon>
+                <span>{{event.contactNumber}}</span>
+              </v-btn>
+            </v-card-text>
           </v-card>
         </v-flex>
-        <v-flex hidden-md-and-down>
+        <v-flex hidden-md-and-down class="ml-3">
           <v-card>
-            <v-card-title>Detail</v-card-title>
+            <v-card-title style="font-weight: 600">{{event.title}}</v-card-title>
+            <v-divider></v-divider>
+            <v-card-text>
+              <div class="event__information__item">
+                <v-icon left>calendar_today</v-icon>
+                <div>
+                  <p>{{event.start_date}}</p>
+                  <p>{{event.start_time}}:00 - {{event.end_time}}:00</p>
+                </div>
+              </div>
+              <div class="event__information__item">
+                <v-icon left>location_city</v-icon>
+                <div>
+                  <p>{{event.locationName }}</p>
+                  <p>{{event.address}}</p>
+                </div>
+              </div>
+              <div class="event__information__item">
+                <v-icon left>shopping_cart</v-icon>
+                <div>
+                  <p>$14 - $20</p>
+                  <p>Pay free tickets within 3 days before the event</p>
+                </div>
+              </div>
+            </v-card-text>
           </v-card>
+          <v-layout class="border">
+            <v-flex lg4>
+              <v-btn flat color class="event__action__item" @click="onClickLike">
+                <v-icon v-if="isLike">favorite</v-icon>
+                <v-icon v-else>favorite_border</v-icon>
+                <span v-if="isLike">Liked</span>
+                <span v-else>Like</span>
+              </v-btn>
+            </v-flex>
+            <v-flex lg4>
+              <div class="event__action__item" @click.stop="dialog = true">
+                <v-icon>share</v-icon>
+                <span>Share</span>
+                <v-dialog v-model="dialog" max-width="400">
+                  <v-card style="padding: 20px">
+                    <v-card-title class="headline">Share with freind</v-card-title>
+                    <v-text-field
+                      solo
+                      :value="'http://localhost:3000/event/' + event.id"
+                      outline
+                      readonly
+                      autofocus
+                      flat
+                      append-icon="file_copy"
+                    ></v-text-field>
+                    <v-card-text>
+                      <v-btn fab dark color="indigo">
+                        <v-icon dark>add</v-icon>
+                      </v-btn>
+                    </v-card-text>
+
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+
+                      <v-btn color="green darken-1" flat="flat" @click="dialog = false">Close</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </div>
+            </v-flex>
+            <v-flex lg4>
+              <div class="event__action__item">
+                <a
+                  target="_blank"
+                  :href="'https://www.google.com/maps/search/?api=1&query='+event.address"
+                >
+                  <v-icon>directions</v-icon>
+                </a>
+                <span>Directions</span>
+              </div>
+            </v-flex>
+            <v-flex lg4>
+              <div class="event__action__item">
+                <v-icon>more_horiz</v-icon>
+                <span>More</span>
+              </div>
+            </v-flex>
+          </v-layout>
         </v-flex>
       </v-layout>
     </v-container>
