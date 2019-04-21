@@ -5,7 +5,7 @@
       <Hero/>
       <!--list wrapper-->
       <div class="title-box center">
-        <h3>Popular Events</h3>
+        <h3>Lastest Event</h3>
         <a class="box-see-more" href="#">
           <span>See more</span>
           <v-icon>navigate_next</v-icon>

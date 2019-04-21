@@ -3,7 +3,7 @@
     <v-container>
       <v-layout style="background-color:white; padding:30px 20px 0px 20px;">
         <v-flex xs12 md4>
-          <v-text-field label="Search Event" light style="margin:0; padding:0;"></v-text-field>
+          <v-text-field label="Search Event" light clearable style="margin:0; padding:0;"></v-text-field>
         </v-flex>
 
         <v-flex xs12 md4>

@@ -25,7 +25,7 @@
       <v-layout>
         <v-flex lg8>
           <!-- About -->
-          <v-card class="mb-5">
+          <v-card elevation="1" class="mb-5">
             <v-card-title class="headline">About</v-card-title>
             <v-divider></v-divider>
             <v-card-text>
@@ -33,24 +33,25 @@
             </v-card-text>
           </v-card>
           <!-- Price -->
-          <v-card class="mb-5">
+
+          <v-card elevation="1" class="mb-5">
             <v-card-title class="headline">Event Price</v-card-title>
             <v-divider></v-divider>
 
             <v-expansion-panel>
-              <v-expansion-panel-content v-for="(item,i) in 5" :key="i">
+              <v-expansion-panel-content v-for="ticket in tickets" :key="ticket.id">
                 <template v-slot:header>
-                  <div>Common Ticket</div>
-                  <div style="text-align: right; font-weight: bold">$400</div>
+                  <div>{{ticket.name}}</div>
+                  <div style="text-align: right; font-weight: bold">${{ticket.price}}</div>
                 </template>
                 <v-card>
-                  <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</v-card-text>
+                  <v-card-text>{{ticket.description}}</v-card-text>
                 </v-card>
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-card>
           <!-- Contact -->
-          <v-card class="mb-5">
+          <v-card elevation="1" class="mb-5">
             <v-card-title class="headline">Contact</v-card-title>
             <v-divider></v-divider>
             <v-card-text>
@@ -65,7 +66,7 @@
           </v-card>
         </v-flex>
         <v-flex hidden-md-and-down class="ml-3">
-          <v-card>
+          <v-card elevation="1">
             <v-card-title style="font-weight: 600">{{event.title}}</v-card-title>
             <v-divider></v-divider>
             <v-card-text>
@@ -86,11 +87,15 @@
               <div class="event__information__item">
                 <v-icon left>shopping_cart</v-icon>
                 <div>
-                  <p>$14 - $20</p>
+                  <p>From ${{event.tickettype.data[0].price}}</p>
                   <p>Pay free tickets within 3 days before the event</p>
                 </div>
               </div>
             </v-card-text>
+            <v-card-actions>
+              <v-btn flat color="orange">Share</v-btn>
+              <v-btn flat color="orange">Explore</v-btn>
+            </v-card-actions>
           </v-card>
           <v-layout class="border">
             <v-flex lg4>
@@ -110,7 +115,7 @@
                     <v-card-title class="headline">Share with freind</v-card-title>
                     <v-text-field
                       solo
-                      :value="'http://localhost:3000/event/' + event.id"
+                      :value="'https://eticket-app.herokuapp.com/event/' + event.id"
                       outline
                       readonly
                       autofocus
@@ -196,18 +201,20 @@ export default {
   },
   methods: {
     onClickLike() {
+      console.log(this.tickets);
       return (this.isLike = !this.isLike);
     }
   },
   validate({ params }) {
     return !isNaN(+params.id);
   },
+
   async asyncData({ params, error }) {
     try {
       const { data } = await axios.get(
         `https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-by-id?event_id=${+params.id}`
       );
-      return { event: data.data[0] };
+      return { event: data.data[0], tickets: data.data[0].tickettype.data };
     } catch (e) {
       error({ message: "Không tìm thấy event", statusCode: 404 });
     }
