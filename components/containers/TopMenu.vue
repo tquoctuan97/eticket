@@ -69,7 +69,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-md-and-down">
         <v-btn flat>For Event Organizer</v-btn>
-        <v-btn flat to="/sign-in" nuxt>
+        <v-btn flat to="/account/sign-in" nuxt>
           Sign In
           <v-icon right>account_circle</v-icon>
         </v-btn>
