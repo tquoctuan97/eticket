@@ -39,7 +39,7 @@
                     <div class="title-btn-wapper">
                       <button v-if="enableInputInfo == false" @click="enableInputInfo = true"><v-icon>edit</v-icon></button>
                       <button v-if="enableInputInfo == true" @click="enableInputInfo = false"><v-icon>close</v-icon></button>
-                      <button v-if="enableInputInfo == true" @click="handleInfoChange"><v-icon>send</v-icon></button>
+                      <button v-if="enableInputInfo == true" @click="handleInfoChange"><v-icon color="primary">send</v-icon></button>
                       </div>
                   </div>
                   <div class="section-content">
@@ -140,7 +140,7 @@
                       <div class="title-btn-wapper">
                       <button v-if="enableInputContact == false" @click="enableInputContact = true"><v-icon>edit</v-icon></button>
                       <button v-if="enableInputContact == true" @click="enableInputContact = false"><v-icon>close</v-icon></button>
-                      <button v-if="enableInputContact == true" @click="handleContactChange"><v-icon>send</v-icon></button>
+                      <button v-if="enableInputContact == true" @click="handleContactChange"><v-icon color="primary">send</v-icon></button>
                       </div>
                   </div>
                   <div class="section-content">
@@ -231,9 +231,11 @@ export default {
         },
         handleInfoChange(){
             console.log('info sent')
+            this.enableInputInfo=false;
         },
         handleContactChange(){
             console.log('contact sent')
+            this.enableInputContact=false;
         },
         clearInput(where){
             if(where=='change_pass'){
