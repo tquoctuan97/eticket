@@ -35,18 +35,9 @@ export default {
     onSubmit() {
       console.log(this.email);
       this.$axios
-        .$post(
-          "https://eticket-vhu.herokuapp.com/api/v1/auth/reset-password",
-          {
-            username: this.email
-          },
-          {
-            headers: {
-              "Content-Type": "application/json;charset=UTF-8",
-              "Access-Control-Allow-Origin": "*"
-            }
-          }
-        )
+        .$post("https://eticket-vhu.herokuapp.com/api/v1/auth/reset-password", {
+          email: this.email
+        })
         .then(result => {
           console.log(result);
         })
