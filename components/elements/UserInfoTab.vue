@@ -1,31 +1,7 @@
 <template>
-    <div>
-    <v-tabs
-    centered
-      color="rgba(255, 77, 0, 0.87)"
-      dark
-      v-model="tabs"
-      slider-color="yellow"
-    >
-      <v-tab
-        v-for="item in tablinks"
-        :key="item.value"
-        ripple
-      >
-       {{ item.text }}
-
-      </v-tab>
-      <v-tab-item
-        v-for="item in tablinks"
-        :key="item.value"
-      >
-        <v-card flat>
-        <!-- ===============Tab ticket list =================-->
-          <v-card-text v-if="item.value=='myticket'" class="myticket" >
-
-          </v-card-text>
-          <!--================ Tab info ==================-->
-          <v-card-text v-if="item.value=='myinfo'" class="my-info">
+<!-- v-if="item.value=='myinfo'" -->
+        <!--================ Tab info ==================-->
+          <v-card-text  class="my-info">
                 <section class="avatar-wrapper">
                   <div class="avatar">
                     <img src="http://en.bcdn.biz/Images/2018/6/6/6483b0a6-667e-4209-9b66-5b4bce6b4e53.jpg" />
@@ -189,10 +165,6 @@
               </section>
 
           </v-card-text>
-        </v-card>
-      </v-tab-item>
-    </v-tabs>
-    </div>
 </template>
 
 <script>
@@ -359,5 +331,3 @@ export default {
 }
 
 </style>
-
-
