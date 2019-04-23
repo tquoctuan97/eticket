@@ -1,8 +1,12 @@
 <template>
-  <v-container fill-height>
-    <v-layout>
+  <v-container fill-height class="signup-wrapper">
+    <v-layout class="bring-center">
       <v-flex xs12 sm8 md4>
         <v-card flat>
+          <v-toolbar color="#FF4D00" dark>
+            <v-toolbar-title>Sign up</v-toolbar-title>
+            <v-spacer></v-spacer>
+          </v-toolbar>
           <v-snackbar v-model="snackbar" absolute top right color="success">
             <span>Registration successful! Please check your email</span>
             <v-icon dark>check_circle</v-icon>
@@ -17,10 +21,12 @@
                     label="First name"
                     prepend-icon="person"
                     required
+                    color="#FF4D00"
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 sm6>
                   <v-text-field
+                  color="#FF4D00"
                     v-model="form.last_name"
                     :rules="rules.name"
                     label="Last name"
@@ -30,6 +36,7 @@
                 </v-flex>
                 <v-flex xs12 sm12>
                   <v-text-field
+                    color="#FF4D00"
                     v-model="form.email"
                     :rules="rules.name"
                     label="Email"
@@ -39,6 +46,7 @@
                 </v-flex>
                 <v-flex xs12 sm12>
                   <v-text-field
+                  color="#FF4D00"
                     v-model="form.phone_number"
                     :rules="rules.name"
                     label="Phone Number"
@@ -48,6 +56,7 @@
                 </v-flex>
                 <v-flex xs12 sm12>
                   <v-text-field
+                  color="#FF4D00"
                     v-model="form.password"
                     :append-icon="show1 ? 'visibility' : 'visibility_off'"
                     :rules="[validatePassword.required, validatePassword.min]"
@@ -63,7 +72,7 @@
                 </v-flex>
 
                 <v-flex xs12>
-                  <v-checkbox v-model="form.terms" color="green">
+                  <v-checkbox v-model="form.terms" color="#FF4D00">
                     <template v-slot:label>
                       <div @click.stop>
                         Do you accept the
@@ -172,4 +181,11 @@ export default {
 </script>
 
 <style>
+.signup-wrapper .v-toolbar__content{
+  color: white;
+}
+.signup-wrapper .bring-center{
+  justify-content: center;
+  align-items: center;
+}
 </style>

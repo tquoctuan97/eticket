@@ -2,10 +2,10 @@
   <div>
     <div class="title-box center">
       <h3>Event Category</h3>
-      <a class="box-see-more" href="#">
+      <!-- <a class="box-see-more" href="#">
         <span>See more</span>
         <v-icon>navigate_next</v-icon>
-      </a>
+      </a> -->
     </div>
     <div class="list-wrapper center" style="justify-content: space-between">
       <!--news items-->
