@@ -37,14 +37,17 @@
                 v-model="password"
                 required
               ></v-text-field>
-              <v-card-actions>
-                <v-btn flat color="mycolor" light nuxt to="/account/sign-up">Sign up</v-btn>
+              <v-card-actions class="sign-in__section">
                 <v-btn color="mycolor" dark type="submit">Login</v-btn>
-                <v-spacer></v-spacer>
+                <v-btn flat color="mycolor" light nuxt to="/account/sign-up">Forgot password?</v-btn>
               </v-card-actions>
             </v-form>
           </v-card-text>
         </v-card>
+              <v-card-actions class="sign-up__section">
+                <div>Didn't have an account?</div>
+                <nuxt-link color="mycolor" to="/account/sign-up">Sign up</nuxt-link>
+              </v-card-actions>
       </v-flex>
     </v-layout>
   </v-container>
@@ -110,4 +113,48 @@ export default {
 </script>
 
 <style>
+.signin-wrapper{
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+.signin-wrapper .btn-group{
+  display: flex;
+  justify-content: space-between;
+}
+.sign-up__section{
+  margin-top: 25px;
+  padding-top: 10px;
+  position: relative;
+}
+
+.sign-in__section{
+  justify-content: space-between;
+  align-items: baseline;
+
+  display: flex;
+}
+.sign-in__section a,
+.sign-up__section a{
+  transition: 0.3s all ease-in-out;
+  color: #ff4d00 ;
+  margin-left: 15px;
+}
+.sign-in__section a:hover,
+.sign-up__section a:hover{
+  color: black;
+}
+.sign-up__section::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  /* background-color: #ebebeb; */
+  height: 1px;
+  width: 80%;
+  transform: translateX(-50%);
+}
+.sign-up__section >div{
+  margin: 10px 0;
+}
 </style>

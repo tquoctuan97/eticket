@@ -88,10 +88,10 @@
                 </v-flex>
               </v-layout>
             </v-container>
-            <v-card-actions>
+            <v-card-actions class="btn-group">
               <v-btn flat @click="resetForm">Cancel</v-btn>
               <v-spacer></v-spacer>
-              <v-btn :disabled="!formIsValid" flat color="primary" type="submit">Register</v-btn>
+              <v-btn :disabled="!formIsValid" dark color="mycolor" type="submit">Register</v-btn>
             </v-card-actions>
           </v-form>
           <v-dialog v-model="terms" width="70%">
@@ -115,6 +115,10 @@
             </v-card>
           </v-dialog>
         </v-card>
+                      <v-card-actions class="sign-up__section">
+                <div>Already have an account?</div>
+                <nuxt-link color="mycolor" to="/account/sign-in">Sign in</nuxt-link>
+              </v-card-actions>
       </v-flex>
     </v-layout>
   </v-container>
@@ -209,5 +213,8 @@ export default {
 .signup-wrapper .bring-center {
   justify-content: center;
   align-items: center;
+}
+.signup-wrapper .btn-group{
+  padding: 10px 15px 25px;
 }
 </style>
