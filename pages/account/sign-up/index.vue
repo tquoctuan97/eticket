@@ -91,7 +91,7 @@
             <v-card-actions class="btn-group">
               <v-btn flat @click="resetForm">Cancel</v-btn>
               <v-spacer></v-spacer>
-              <v-btn :disabled="!formIsValid" dark color="mycolor" type="submit">Register</v-btn>
+              <v-btn :disabled="!formIsValid" color="mycolor" type="submit">Register</v-btn>
             </v-card-actions>
           </v-form>
           <v-dialog v-model="terms" width="70%">

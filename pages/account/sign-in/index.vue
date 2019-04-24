@@ -126,6 +126,7 @@ export default {
   margin-top: 25px;
   padding-top: 10px;
   position: relative;
+  justify-content: center;
 }
 
 .sign-in__section{
