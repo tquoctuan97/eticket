@@ -26,7 +26,7 @@
                 </v-flex>
                 <v-flex xs12 sm6>
                   <v-text-field
-                  color="#FF4D00"
+                    color="#FF4D00"
                     v-model="form.last_name"
                     :rules="rules.name"
                     label="Last name"
@@ -46,7 +46,7 @@
                 </v-flex>
                 <v-flex xs12 sm12>
                   <v-text-field
-                  color="#FF4D00"
+                    color="#FF4D00"
                     v-model="form.phone_number"
                     :rules="rules.name"
                     label="Phone Number"
@@ -56,7 +56,7 @@
                 </v-flex>
                 <v-flex xs12 sm12>
                   <v-text-field
-                  color="#FF4D00"
+                    color="#FF4D00"
                     v-model="form.password"
                     :append-icon="show1 ? 'visibility' : 'visibility_off'"
                     :rules="[validatePassword.required, validatePassword.min]"
@@ -203,10 +203,10 @@ export default {
 </script>
 
 <style>
-.signup-wrapper .v-toolbar__content{
+.signup-wrapper .v-toolbar__content {
   color: white;
 }
-.signup-wrapper .bring-center{
+.signup-wrapper .bring-center {
   justify-content: center;
   align-items: center;
 }

@@ -3,7 +3,7 @@
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-0">
-          <v-toolbar color="#FF4D00" dark>
+          <v-toolbar color="mycolor" dark>
             <v-toolbar-title>Sign in</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
@@ -22,7 +22,7 @@
             </v-snackbar>
             <v-form @submit.prevent="onSubmit">
               <v-text-field
-                color="#FF4D00"
+                color="mycolor"
                 prepend-icon="email"
                 label="Email"
                 type="email"
@@ -30,21 +30,20 @@
                 required
               ></v-text-field>
               <v-text-field
-                color="#FF4D00"
+                color="mycolor"
                 prepend-icon="lock"
                 label="Password"
                 type="password"
                 v-model="password"
                 required
               ></v-text-field>
-              <v-btn color="primary" type="submit">Login</v-btn>
+              <v-card-actions>
+                <v-btn flat color="mycolor" light nuxt to="/account/sign-up">Sign up</v-btn>
+                <v-btn color="mycolor" dark type="submit">Login</v-btn>
+                <v-spacer></v-spacer>
+              </v-card-actions>
             </v-form>
           </v-card-text>
-          <v-card-actions>
-            <v-btn flat color="#FF4D00" light nuxt to="/account/sign-up">Sign up</v-btn>
-            <v-btn color="#FF4D00" dark type="submit">Login</v-btn>
-            <v-spacer></v-spacer>
-          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
