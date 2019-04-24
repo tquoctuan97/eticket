@@ -40,6 +40,7 @@
                     v-model="form.email"
                     :rules="rules.name"
                     label="Email"
+                    type="email"
                     prepend-icon="email"
                     required
                   ></v-text-field>
