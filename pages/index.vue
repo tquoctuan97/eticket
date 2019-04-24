@@ -136,6 +136,11 @@ export default {
   }
 };
 </script>
+<style scoped>
+.title-box {
+  margin-top: 40px;
+}
+</style>
 
 <style>
 .main-content {
@@ -152,7 +157,6 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px;
-  margin-top: 40px;
 }
 
 .title-box h3 {

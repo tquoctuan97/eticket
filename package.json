@@ -12,7 +12,6 @@
     "generate": "nuxt generate"
   },
   "engines": {
-    "node": "11.11.0",
     "npm": "6.7.0"
   },
   "dependencies": {

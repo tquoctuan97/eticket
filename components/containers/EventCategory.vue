@@ -1,11 +1,11 @@
 <template>
-  <v-container>
+  <div>
     <div class="title-box center">
       <h3>Event Category</h3>
-      <a class="box-see-more" href="#">
+      <!-- <a class="box-see-more" href="#">
         <span>See more</span>
         <v-icon>navigate_next</v-icon>
-      </a>
+      </a> -->
     </div>
     <div class="list-wrapper center" style="justify-content: space-between">
       <!--news items-->
@@ -43,7 +43,7 @@
       </div>
       <!--news items-->
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -51,4 +51,24 @@ export default {};
 </script>
 
 <style>
+.image-items{
+  border-radius: 50%;
+  overflow: hidden;
+  transition: 0.3s all ease-in-out;
+}
+.image-items + *{
+  transition: 0.3s all ease-in-out;
+
+}
+.category_item{
+  cursor: pointer;
+}
+.category_item:hover .image-items{
+  transform: translateY(-8px);
+  box-shadow: 0px 10px 11px 0px rgba(0, 0, 0, 0.1);
+
+}
+.category_item:hover .image-items + *{
+  color: #FF4D00;
+}
 </style>
