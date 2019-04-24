@@ -21,8 +21,20 @@
               <v-icon dark right>warning</v-icon>
             </v-snackbar>
             <v-form @submit.prevent="onSubmit">
-              <v-text-field prepend-icon="email" label="Email" type="email" v-model="username"></v-text-field>
-              <v-text-field prepend-icon="lock" label="Password" type="password" v-model="password"></v-text-field>
+              <v-text-field
+                prepend-icon="email"
+                label="Email"
+                type="email"
+                v-model="username"
+                required
+              ></v-text-field>
+              <v-text-field
+                prepend-icon="lock"
+                label="Password"
+                type="password"
+                v-model="password"
+                required
+              ></v-text-field>
               <v-btn color="primary" type="submit">Login</v-btn>
             </v-form>
           </v-card-text>
@@ -56,7 +68,8 @@ export default {
       this.$axios
         .$post("https://eticket-vhu.herokuapp.com/api/v1/auth/login", {
           username: this.username,
-          password: this.password
+          password: this.password,
+          device_type: "CLIENT_WEB"
         })
         .then(result => {
           console.log(result);

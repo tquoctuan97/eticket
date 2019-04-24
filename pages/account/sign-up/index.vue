@@ -165,6 +165,28 @@ export default {
     },
     submit() {
       this.snackbar = true;
+      console.log(
+        this.form.first_name,
+        this.form.last_name,
+        this.form.phone_number,
+        this.form.password,
+        this.form.terms
+      );
+      this.$axios
+        .$post("https://eticket-vhu.herokuapp.com/api/v1/auth/register", {
+          email: this.form.email,
+          first_name: this.form.first_name,
+          last_name: this.form.last_name,
+          password: this.form.password,
+          phone_number: this.form.phone_number,
+          role_slug: "client"
+        })
+        .then(result => {
+          console.log(result);
+        })
+        .catch(e => {
+          console.log(e);
+        });
       this.resetForm();
     }
   }
