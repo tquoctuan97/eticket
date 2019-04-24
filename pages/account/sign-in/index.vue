@@ -39,7 +39,7 @@
               ></v-text-field>
               <v-card-actions class="sign-in__section">
                 <v-btn color="mycolor" dark type="submit">Login</v-btn>
-                <v-btn flat color="mycolor" light nuxt to="/account/sign-up">Forgot password?</v-btn>
+                <v-btn flat color="mycolor" light nuxt to="/account/reset-password">Forgot password?</v-btn>
               </v-card-actions>
             </v-form>
           </v-card-text>

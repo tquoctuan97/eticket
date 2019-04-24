@@ -35,7 +35,8 @@ footer {
   margin: auto;
   flex-wrap: wrap;
   z-index: 3;
-  background-color: #fcfcfc;
+  background-color: #000;
+  color: white;
 }
 footer .apps{
   display: flex;

@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import UserInfoTab from '../../components/elements/UserInfoTab.vue';
-import UserEventTab from '../../components/elements/UserEventTab.vue';
-import FavoriteEvent from '../../components/elements/FavoriteEvent.vue';
+import UserInfoTab from '../../../components/elements/UserInfoTab.vue';
+import UserEventTab from '../../../components/elements/UserEventTab.vue';
+import FavoriteEvent from '../../../components/elements/FavoriteEvent.vue';
 export default {
     components: {
         UserInfoTab,
