@@ -37,14 +37,13 @@
                 v-model="password"
                 required
               ></v-text-field>
-              <v-btn color="primary" type="submit">Login</v-btn>
+              <v-card-actions>
+                <v-btn flat color="#FF4D00" light nuxt to="/account/sign-up">Sign up</v-btn>
+                <v-btn color="#FF4D00" dark type="submit">Login</v-btn>
+                <v-spacer></v-spacer>
+              </v-card-actions>
             </v-form>
           </v-card-text>
-          <v-card-actions>
-            <v-btn flat color="#FF4D00" light nuxt to="/account/sign-up">Sign up</v-btn>
-            <v-btn color="#FF4D00" dark type="submit">Login</v-btn>
-            <v-spacer></v-spacer>
-          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
