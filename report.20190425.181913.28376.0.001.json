@@ -1,0 +1,329 @@
+
+{
+  "header": {
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20190425.181913.28376.0.001.json",
+    "dumpEventTime": "2019-04-25T18:19:13Z",
+    "processId": 28376,
+    "cwd": "D:\\Workspace\\Learn Stuff\\Vue\\eticket",
+    "commandLine": [
+      "D:\\Program Files\\NodeJS\\node.exe",
+      "D:\\Workspace\\Learn Stuff\\Vue\\eticket\\node_modules\\.bin\\\\..\\nuxt\\bin\\nuxt.js"
+    ],
+    "nodejsVersion": "v11.14.0",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "11.14.0",
+      "v8": "7.0.276.38-node.18",
+      "uv": "1.27.0",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.15.0",
+      "modules": "67",
+      "nghttp2": "1.37.0",
+      "napi": "4",
+      "llhttp": "1.1.1",
+      "http_parser": "2.8.0",
+      "openssl": "1.1.1b",
+      "cldr": "34.0",
+      "icu": "63.1",
+      "tz": "2018e",
+      "unicode": "11.0"
+    },
+    "release": {
+      "name": "node",
+      "headersUrl": "https://nodejs.org/download/release/v11.14.0/node-v11.14.0-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v11.14.0/node-v11.14.0.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v11.14.0/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.16299",
+    "osVersion": "Windows 10 Home Single Language",
+    "osMachine": "x86_64",
+    "host": "JUNNIE"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff7be2cd24e",
+      "symbol": "std::basic_ios<char,std::char_traits<char> >::fill+16366"
+    },
+    {
+      "pc": "0x00007ff7be2cc0f9",
+      "symbol": "std::basic_ios<char,std::char_traits<char> >::fill+11929"
+    },
+    {
+      "pc": "0x00007ff7be2cb923",
+      "symbol": "std::basic_ios<char,std::char_traits<char> >::fill+9923"
+    },
+    {
+      "pc": "0x00007ff7be3bc1d2",
+      "symbol": "uv_loop_fork+89362"
+    },
+    {
+      "pc": "0x00007ff7be7e454e",
+      "symbol": "v8::internal::FatalProcessOutOfMemory+798"
+    },
+    {
+      "pc": "0x00007ff7be7e4487",
+      "symbol": "v8::internal::FatalProcessOutOfMemory+599"
+    },
+    {
+      "pc": "0x00007ff7be897f64",
+      "symbol": "v8::internal::Heap::RootIsImmortalImmovable+14068"
+    },
+    {
+      "pc": "0x00007ff7be88dd72",
+      "symbol": "v8::internal::Heap::CollectGarbage+7234"
+    },
+    {
+      "pc": "0x00007ff7be88c588",
+      "symbol": "v8::internal::Heap::CollectGarbage+1112"
+    },
+    {
+      "pc": "0x00007ff7be895eb7",
+      "symbol": "v8::internal::Heap::RootIsImmortalImmovable+5703"
+    },
+    {
+      "pc": "0x00007ff7be895f36",
+      "symbol": "v8::internal::Heap::RootIsImmortalImmovable+5830"
+    },
+    {
+      "pc": "0x00007ff7be9cde01",
+      "symbol": "v8::internal::Factory::NewFillerObject+49"
+    },
+    {
+      "pc": "0x00007ff7bea87cd6",
+      "symbol": "v8::internal::StoreBuffer::StoreBufferOverflow+27190"
+    },
+    {
+      "pc": "0x000000558b3d0481",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 1486454784,
+    "totalCommittedMemory": 1486454784,
+    "usedMemory": 1410926360,
+    "availableMemory": 39444232,
+    "memoryLimit": 1526909922,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 524288,
+        "committedMemory": 524288,
+        "capacity": 515584,
+        "used": 33520,
+        "available": 482064
+      },
+      "new_space": {
+        "memorySize": 4194304,
+        "committedMemory": 4194304,
+        "capacity": 2062336,
+        "used": 227856,
+        "available": 1834480
+      },
+      "old_space": {
+        "memorySize": 989007872,
+        "committedMemory": 989007872,
+        "capacity": 943217520,
+        "used": 942703464,
+        "available": 514056
+      },
+      "code_space": {
+        "memorySize": 11010048,
+        "committedMemory": 11010048,
+        "capacity": 9493024,
+        "used": 9493024,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 92811264,
+        "committedMemory": 92811264,
+        "capacity": 71944960,
+        "used": 71944960,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 388907008,
+        "committedMemory": 388907008,
+        "capacity": 423137168,
+        "used": 386523536,
+        "available": 36613632
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 0,
+        "used": 0,
+        "available": 0
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 1408.5,
+    "kernelCpuSeconds": 87.015,
+    "cpuConsumptionPercent": 0.883216,
+    "maxRss": 1248022528,
+    "pageFaults": {
+      "IORequired": 12145279,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 14443,
+      "writes": 1366
+    }
+  },
+  "libuv": [
+  ],
+  "environmentVariables": {
+    "=C:": "C:\\",
+    "=D:": "D:\\Workspace\\Learn Stuff\\Vue\\eticket",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\tranx\\AppData\\Roaming",
+    "ChocolateyInstall": "C:\\ProgramData\\chocolatey",
+    "ChocolateyLastPathUpdate": "Sat Mar  2 13:19:36 2019",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "JUNNIE",
+    "ComSpec": "C:\\WINDOWS\\system32\\cmd.exe",
+    "FPS_BROWSER_APP_PROFILE_STRING": "Internet Explorer",
+    "FPS_BROWSER_USER_PROFILE_STRING": "Default",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\tranx",
+    "INIT_CWD": "D:\\Workspace\\Learn Stuff\\Vue\\eticket",
+    "LANG": "en_US.UTF-8",
+    "LOCALAPPDATA": "C:\\Users\\tranx\\AppData\\Local",
+    "LOGONSERVER": "\\\\JUNNIE",
+    "NODE": "D:\\Program Files\\NodeJS\\node.exe",
+    "NODE_ENV": "development",
+    "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"dev\"],\"original\":[\"run\",\"dev\"]}",
+    "npm_config_bin_links": "true",
+    "npm_config_ignore_optional": "",
+    "npm_config_ignore_scripts": "",
+    "npm_config_init_license": "MIT",
+    "npm_config_init_version": "1.0.0",
+    "npm_config_registry": "https://registry.yarnpkg.com",
+    "npm_config_save_prefix": "^",
+    "npm_config_strict_ssl": "true",
+    "npm_config_user_agent": "yarn/1.13.0 npm/? node/v11.14.0 win32 x64",
+    "npm_config_version_commit_hooks": "true",
+    "npm_config_version_git_message": "v%s",
+    "npm_config_version_git_sign": "",
+    "npm_config_version_git_tag": "true",
+    "npm_config_version_tag_prefix": "v",
+    "npm_execpath": "C:\\Users\\tranx\\AppData\\Roaming\\npm\\node_modules\\yarn\\bin\\yarn.js",
+    "npm_lifecycle_event": "dev",
+    "npm_lifecycle_script": "nuxt",
+    "npm_node_execpath": "D:\\Program Files\\NodeJS\\node.exe",
+    "npm_package_author_name": "tquoctuanit",
+    "npm_package_dependencies_cross_env": "^5.2.0",
+    "npm_package_dependencies_nuxt": "^2.4.0",
+    "npm_package_dependencies_vuetify": "^1.5.5",
+    "npm_package_dependencies_vuetify_loader": "^1.2.1",
+    "npm_package_dependencies__nuxtjs_axios": "^5.3.6",
+    "npm_package_dependencies__nuxtjs_proxy": "^1.3.3",
+    "npm_package_description": "Ticket for event",
+    "npm_package_devDependencies_nodemon": "^1.18.9",
+    "npm_package_devDependencies_stylus": "^0.54.5",
+    "npm_package_devDependencies_stylus_loader": "^3.0.2",
+    "npm_package_engines_npm": "6.7.0",
+    "npm_package_name": "eTicket",
+    "npm_package_private": "true",
+    "npm_package_readmeFilename": "README.md",
+    "npm_package_scripts_build": "nuxt build",
+    "npm_package_scripts_dev": "nuxt",
+    "npm_package_scripts_generate": "nuxt generate",
+    "npm_package_scripts_heroku_postbuild": "npm run build",
+    "npm_package_scripts_start": "nuxt start",
+    "npm_package_version": "1.0.0",
+    "NUMBER_OF_PROCESSORS": "8",
+    "OneDrive": "C:\\Users\\tranx\\OneDrive",
+    "OneDriveConsumer": "C:\\Users\\tranx\\OneDrive",
+    "OS": "Windows_NT",
+    "Path": "C:\\Users\\tranx\\AppData\\Local\\Temp\\yarn--1556021837203-0.2003569973774475;D:\\Workspace\\Learn Stuff\\Vue\\eticket\\node_modules\\.bin;C:\\Users\\tranx\\AppData\\Local\\Yarn\\Data\\link\\node_modules\\.bin;D:\\Workspace\\Learn Stuff\\Vue\\eticket\\node_modules\\.bin;C:\\Users\\tranx\\AppData\\Local\\Yarn\\Data\\link\\node_modules\\.bin;C:\\Users\\tranx\\AppData\\Local\\Yarn\\bin;D:\\Program Files\\libexec\\lib\\node_modules\\npm\\bin\\node-gyp-bin;D:\\Program Files\\lib\\node_modules\\npm\\bin\\node-gyp-bin;D:\\Program Files\\NodeJS\\node_modules\\npm\\bin\\node-gyp-bin;D:\\Program Files\\NodeJS;C:\\Program Files (x86)\\Intel\\iCLS Client\\;C:\\Program Files\\Intel\\iCLS Client\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\DAL;C:\\Program Files (x86)\\Intel\\Intel(R) Management Engine Components\\IPT;C:\\Program Files\\Intel\\Intel(R) Management Engine Components\\IPT;D:\\Program Files\\Git\\cmd;C:\\ProgramData\\chocolatey\\bin;D:\\Program Files\\NodeJS\\;C:\\Users\\tranx\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\tranx\\AppData\\Local\\.meteor;D:\\Program Files\\Heroku\\bin;D:\\Program Files\\Microsoft VS Code\\bin;C:\\Users\\tranx\\AppData\\Roaming\\npm",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC;.CPL",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "8e0a",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "PSModulePath": "C:\\Users\\tranx\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "SESSIONNAME": "Console",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\WINDOWS",
+    "TEMP": "C:\\Users\\tranx\\AppData\\Local\\Temp",
+    "TERM_PROGRAM": "vscode",
+    "TERM_PROGRAM_VERSION": "1.33.1",
+    "TMP": "C:\\Users\\tranx\\AppData\\Local\\Temp",
+    "USERDOMAIN": "JUNNIE",
+    "USERDOMAIN_ROAMINGPROFILE": "JUNNIE",
+    "USERNAME": "tranx",
+    "USERPROFILE": "C:\\Users\\tranx",
+    "VUE_ENV": "server",
+    "windir": "C:\\WINDOWS",
+    "YARN_WRAP_OUTPUT": "false",
+    "_AXIOS_BASE_URL_": "https://eticket-app.herokuapp.com"
+  },
+  "sharedObjects": [
+    "D:\\Program Files\\NodeJS\\node.exe",
+    "C:\\WINDOWS\\SYSTEM32\\ntdll.dll",
+    "C:\\WINDOWS\\System32\\KERNEL32.DLL",
+    "C:\\WINDOWS\\System32\\KERNELBASE.dll",
+    "C:\\WINDOWS\\SYSTEM32\\apphelp.dll",
+    "C:\\WINDOWS\\System32\\PSAPI.DLL",
+    "C:\\WINDOWS\\System32\\WS2_32.dll",
+    "C:\\WINDOWS\\System32\\RPCRT4.dll",
+    "C:\\WINDOWS\\System32\\ADVAPI32.dll",
+    "C:\\WINDOWS\\System32\\msvcrt.dll",
+    "C:\\WINDOWS\\System32\\sechost.dll",
+    "C:\\WINDOWS\\System32\\USER32.dll",
+    "C:\\WINDOWS\\System32\\win32u.dll",
+    "C:\\WINDOWS\\System32\\GDI32.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dbghelp.dll",
+    "C:\\WINDOWS\\System32\\gdi32full.dll",
+    "C:\\WINDOWS\\System32\\ucrtbase.dll",
+    "C:\\WINDOWS\\System32\\msvcp_win.dll",
+    "C:\\WINDOWS\\System32\\CRYPT32.dll",
+    "C:\\WINDOWS\\System32\\MSASN1.dll",
+    "C:\\WINDOWS\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\USERENV.dll",
+    "C:\\WINDOWS\\System32\\profapi.dll",
+    "C:\\WINDOWS\\SYSTEM32\\bcrypt.dll",
+    "C:\\WINDOWS\\SYSTEM32\\WINMM.dll",
+    "C:\\WINDOWS\\SYSTEM32\\winmmbase.dll",
+    "C:\\WINDOWS\\System32\\cfgmgr32.dll",
+    "C:\\WINDOWS\\System32\\IMM32.DLL",
+    "C:\\WINDOWS\\System32\\combase.dll",
+    "C:\\WINDOWS\\System32\\bcryptPrimitives.dll",
+    "C:\\WINDOWS\\System32\\powrprof.dll",
+    "C:\\WINDOWS\\system32\\uxtheme.dll",
+    "C:\\WINDOWS\\system32\\mswsock.dll",
+    "C:\\WINDOWS\\System32\\kernel.appcore.dll",
+    "C:\\WINDOWS\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\WINDOWS\\System32\\NSI.dll",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\WINDOWS\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\WINDOWS\\system32\\napinsp.dll",
+    "C:\\WINDOWS\\system32\\pnrpnsp.dll",
+    "C:\\WINDOWS\\system32\\NLAapi.dll",
+    "C:\\WINDOWS\\SYSTEM32\\DNSAPI.dll",
+    "C:\\WINDOWS\\System32\\winrnr.dll",
+    "C:\\WINDOWS\\System32\\wshbth.dll",
+    "C:\\Windows\\System32\\rasadhlp.dll",
+    "C:\\WINDOWS\\System32\\fwpuclnt.dll"
+  ]
+}
