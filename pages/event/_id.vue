@@ -67,7 +67,7 @@
         </v-flex>
         <v-flex hidden-md-and-down class="ml-3">
           <v-card elevation="1">
-            <v-card-title style="font-weight: 600">{{event.title}}</v-card-title>
+            <v-card-title class="headline" style="font-weight: 600">{{event.title}}</v-card-title>
             <v-divider></v-divider>
             <v-card-text>
               <div class="event__information__item">
@@ -91,70 +91,98 @@
                   <p>Pay free tickets within 3 days before the event</p>
                 </div>
               </div>
+              <!-- Share -->
+              <v-divider></v-divider>
+              <v-layout class="mt-2 mb-2">
+                
+                <v-flex lg4>
+                  <v-btn flat color class="event__action__item" @click="onClickLike">
+                    <v-icon v-if="isLike">favorite</v-icon>
+                    <v-icon v-else>favorite_border</v-icon>
+                    <span v-if="isLike">Liked</span>
+                    <span v-else>Like</span>
+                  </v-btn>
+                </v-flex>
+                <v-flex lg4>
+                  <div class="event__action__item" @click.stop="dialog = true">
+                    <v-icon>share</v-icon>
+                    <span>Share</span>
+                    <v-dialog v-model="dialog" max-width="400">
+                      <v-card style="padding: 20px">
+                        <v-card-title class="headline">Share with freind</v-card-title>
+                        <v-text-field
+                          solo
+                          :value="'https://eticket-app.herokuapp.com/event/' + event.id"
+                          outline
+                          readonly
+                          autofocus
+                          flat
+                          append-icon="file_copy"
+                        ></v-text-field>
+                        <v-card-text>
+                          <v-btn fab dark color="indigo">
+                            <v-icon dark>add</v-icon>
+                          </v-btn>
+                        </v-card-text>
+
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+
+                          <v-btn color="green darken-1" flat="flat" @click="dialog = false">Close</v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                  </div>
+                </v-flex>
+                <v-flex lg4>
+                  <div class="event__action__item">
+                    <a
+                      target="_blank"
+                      :href="'https://www.google.com/maps/search/?api=1&query='+event.address"
+                    >
+                      <v-icon>directions</v-icon>
+                    </a>
+                    <span>Directions</span>
+                  </div>
+                </v-flex>
+                <v-flex lg4>
+                  <div class="event__action__item">
+                    <v-icon>more_horiz</v-icon>
+                    <span>More</span>
+                  </div>
+                </v-flex>
+                
+              </v-layout>
+              <v-divider></v-divider>
             </v-card-text>
+            <!-- Button Mua Ve -->
             <v-card-actions>
-              <v-btn flat color="orange">Share</v-btn>
-              <v-btn flat color="orange">Explore</v-btn>
+             <v-dialog v-model="dialog_buyTicket" max-width="600px">
+            <template v-slot:activator="{ on }">
+              <v-btn large block color="mycolor" dark v-on="on">GET TICKET NOW</v-btn>
+            </template>
+            <v-card>
+              <v-card-title>
+                <span class="headline">Buy ticket</span>
+              </v-card-title>
+              <v-divider></v-divider>
+              <v-card-text>
+                <v-radio-group v-model="radioGroup">
+                  <v-radio v-for="n in 3" :key="n" :label="`Radio ${n}`" :value="n"></v-radio>
+                </v-radio-group>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn color="blue darken-1" flat @click="dialog_buyTicket = false">Close</v-btn>
+                <v-spacer></v-spacer>
+                <v-btn dark color="mycolor darken-1" @click="dialog_buyTicket = false">Pay Now</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
             </v-card-actions>
           </v-card>
-          <v-layout class="border">
-            <v-flex lg4>
-              <v-btn flat color class="event__action__item" @click="onClickLike">
-                <v-icon v-if="isLike">favorite</v-icon>
-                <v-icon v-else>favorite_border</v-icon>
-                <span v-if="isLike">Liked</span>
-                <span v-else>Like</span>
-              </v-btn>
-            </v-flex>
-            <v-flex lg4>
-              <div class="event__action__item" @click.stop="dialog = true">
-                <v-icon>share</v-icon>
-                <span>Share</span>
-                <v-dialog v-model="dialog" max-width="400">
-                  <v-card style="padding: 20px">
-                    <v-card-title class="headline">Share with freind</v-card-title>
-                    <v-text-field
-                      solo
-                      :value="'https://eticket-app.herokuapp.com/event/' + event.id"
-                      outline
-                      readonly
-                      autofocus
-                      flat
-                      append-icon="file_copy"
-                    ></v-text-field>
-                    <v-card-text>
-                      <v-btn fab dark color="indigo">
-                        <v-icon dark>add</v-icon>
-                      </v-btn>
-                    </v-card-text>
 
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-
-                      <v-btn color="green darken-1" flat="flat" @click="dialog = false">Close</v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </div>
-            </v-flex>
-            <v-flex lg4>
-              <div class="event__action__item">
-                <a
-                  target="_blank"
-                  :href="'https://www.google.com/maps/search/?api=1&query='+event.address"
-                >
-                  <v-icon>directions</v-icon>
-                </a>
-                <span>Directions</span>
-              </div>
-            </v-flex>
-            <v-flex lg4>
-              <div class="event__action__item">
-                <v-icon>more_horiz</v-icon>
-                <span>More</span>
-              </div>
-            </v-flex>
-          </v-layout>
+          
+          
         </v-flex>
       </v-layout>
     </v-container>
@@ -196,7 +224,8 @@ export default {
   data() {
     return {
       isLike: false,
-      dialog: false
+      dialog: false,
+      dialog_buyTicket: false
     };
   },
   methods: {
