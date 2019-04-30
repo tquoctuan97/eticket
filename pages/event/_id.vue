@@ -94,7 +94,6 @@
               <!-- Share -->
               <v-divider></v-divider>
               <v-layout class="mt-2 mb-2">
-                
                 <v-flex lg4>
                   <v-btn flat color class="event__action__item" @click="onClickLike">
                     <v-icon v-if="isLike">favorite</v-icon>
@@ -109,7 +108,7 @@
                     <span>Share</span>
                     <v-dialog v-model="dialog" max-width="400">
                       <v-card style="padding: 20px">
-                        <v-card-title class="headline">Share with freind</v-card-title>
+                        <v-card-title class="headline">Share with friend</v-card-title>
                         <v-text-field
                           solo
                           :value="'https://eticket-app.herokuapp.com/event/' + event.id"
@@ -120,9 +119,9 @@
                           append-icon="file_copy"
                         ></v-text-field>
                         <v-card-text>
-                          <v-btn fab dark color="indigo">
+                          <!-- <v-btn fab dark color="indigo">
                             <v-icon dark>add</v-icon>
-                          </v-btn>
+                          </v-btn>-->
                         </v-card-text>
 
                         <v-card-actions>
@@ -151,38 +150,34 @@
                     <span>More</span>
                   </div>
                 </v-flex>
-                
               </v-layout>
               <v-divider></v-divider>
             </v-card-text>
             <!-- Button Mua Ve -->
             <v-card-actions>
-             <v-dialog v-model="dialog_buyTicket" max-width="600px">
-            <template v-slot:activator="{ on }">
-              <v-btn large block color="mycolor" dark v-on="on">GET TICKET NOW</v-btn>
-            </template>
-            <v-card>
-              <v-card-title>
-                <span class="headline">Buy ticket</span>
-              </v-card-title>
-              <v-divider></v-divider>
-              <v-card-text>
-                <v-radio-group v-model="radioGroup">
-                  <v-radio v-for="n in 3" :key="n" :label="`Radio ${n}`" :value="n"></v-radio>
-                </v-radio-group>
-              </v-card-text>
-              <v-card-actions>
-                <v-btn color="blue darken-1" flat @click="dialog_buyTicket = false">Close</v-btn>
-                <v-spacer></v-spacer>
-                <v-btn dark color="mycolor darken-1" @click="dialog_buyTicket = false">Pay Now</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
+              <v-dialog v-model="dialog_buyTicket" max-width="600px">
+                <template v-slot:activator="{ on }">
+                  <v-btn large block color="mycolor" dark v-on="on">GET TICKET NOW</v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">Buy ticket</span>
+                  </v-card-title>
+                  <v-divider></v-divider>
+                  <v-card-text>
+                    <v-radio-group v-model="radioGroup">
+                      <v-radio v-for="n in 3" :key="n" :label="`Radio ${n}`" :value="n"></v-radio>
+                    </v-radio-group>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-btn color="blue darken-1" flat @click="dialog_buyTicket = false">Close</v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn dark color="mycolor darken-1" @click="dialog_buyTicket = false">Pay Now</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </v-card-actions>
           </v-card>
-
-          
-          
         </v-flex>
       </v-layout>
     </v-container>
