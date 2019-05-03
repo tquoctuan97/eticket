@@ -37,7 +37,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar color="white">
+    <v-toolbar color="white" class="header" app>
       <v-toolbar-side-icon class="hidden-md-and-up" @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
 
       <v-toolbar-title style="border-right: 0.25px solid #eee; padding-right:20px;">
