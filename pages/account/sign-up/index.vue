@@ -2,9 +2,9 @@
   <v-container fill-height class="signup-wrapper">
     <v-layout class="bring-center">
       <v-flex xs12 sm8 md4>
-        <v-card flat>
-          <v-toolbar color="#FF4D00" dark>
-            <v-toolbar-title>Sign up</v-toolbar-title>
+        <v-card flat class="elevation-1">
+          <v-toolbar color="#FF4D00" dark flat>
+            <v-toolbar-title>Create a New Account</v-toolbar-title>
             <v-spacer></v-spacer>
           </v-toolbar>
           <v-snackbar v-model="snackbar" absolute top right color="success">
@@ -116,10 +116,10 @@
             </v-card>
           </v-dialog>
         </v-card>
-                      <v-card-actions class="sign-up__section">
-                <div>Already have an account?</div>
-                <nuxt-link color="mycolor" to="/account/sign-in">Sign in</nuxt-link>
-              </v-card-actions>
+        <v-card-actions class="sign-up__section">
+          <div>Already have an account?</div>
+          <nuxt-link color="mycolor" to="/account/sign-in">Sign in</nuxt-link>
+        </v-card-actions>
       </v-flex>
     </v-layout>
   </v-container>
@@ -215,7 +215,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.signup-wrapper .btn-group{
+.signup-wrapper .btn-group {
   padding: 10px 15px 25px;
 }
 </style>

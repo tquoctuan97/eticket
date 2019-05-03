@@ -1,11 +1,7 @@
 <template>
-  <div>
+  <section class="mt-5 pa-5" style="background-color:#fff">
     <div class="title-box center">
       <h3>Event Category</h3>
-      <!-- <a class="box-see-more" href="#">
-        <span>See more</span>
-        <v-icon>navigate_next</v-icon>
-      </a> -->
     </div>
     <div class="list-wrapper center" style="justify-content: space-between">
       <!--news items-->
@@ -43,7 +39,7 @@
       </div>
       <!--news items-->
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -51,24 +47,22 @@ export default {};
 </script>
 
 <style>
-.image-items{
+.image-items {
   border-radius: 50%;
   overflow: hidden;
   transition: 0.3s all ease-in-out;
 }
-.image-items + *{
+.image-items + * {
   transition: 0.3s all ease-in-out;
-
 }
-.category_item{
+.category_item {
   cursor: pointer;
 }
-.category_item:hover .image-items{
+.category_item:hover .image-items {
   transform: translateY(-8px);
   box-shadow: 0px 10px 11px 0px rgba(0, 0, 0, 0.1);
-
 }
-.category_item:hover .image-items + *{
-  color: #FF4D00;
+.category_item:hover .image-items + * {
+  color: #ff4d00;
 }
 </style>

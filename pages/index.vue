@@ -146,7 +146,7 @@ export default {
 .main-content {
   width: 100%;
   min-height: 100vh;
-  background: #fff;
+  background: #f4f4f3;
 }
 .center {
   width: 1440px;
@@ -183,13 +183,13 @@ export default {
   margin: 1%;
   background: #fff;
   overflow: hidden;
+  -webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+  -moz-transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+  transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
 }
 .post-card:hover {
-  transition: 0.3s all ease-in-out;
-  background: #ffffff;
-  -webkit-box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
-  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.05);
-  border-radius: 9px;
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 .post-card .overlay {
   position: absolute;

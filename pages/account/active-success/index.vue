@@ -2,7 +2,7 @@
   <v-content>
     <v-container fluid fill-height>
       <v-layout align-center justify-center column>
-        <v-card align-center justify-center max-width="500" class="pa-5 elevation-0">
+        <v-card align-center justify-center max-width="500" class="pa-5 elevation-1">
           <v-layout align-center justify-center>
             <v-card-title primary-title>
               <h3 class="headline" style="color: green;">Successful account activation</h3>
@@ -11,7 +11,7 @@
           </v-layout>
           <v-layout align-center justify-center>
             <v-card-actions>
-              <v-btn color="green" dark nuxt depressed to="/account/sign-in">Sign In now</v-btn>
+              <v-btn color="green" dark nuxt to="/account/sign-in">Sign In now</v-btn>
             </v-card-actions>
           </v-layout>
         </v-card>

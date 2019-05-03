@@ -2,10 +2,9 @@
   <v-container class="signin-wrapper">
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
-        <v-card class="elevation-0">
-          <v-toolbar color="mycolor" dark>
-            <v-toolbar-title>Sign in</v-toolbar-title>
-            <v-spacer></v-spacer>
+        <v-card class="elevation-1">
+          <v-toolbar color="mycolor" dark flat>
+            <v-toolbar-title>Welcome Back</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
             <v-snackbar v-model="snackbar_success" absolute top right color="success">
@@ -38,16 +37,16 @@
                 required
               ></v-text-field>
               <v-card-actions class="sign-in__section">
-                <v-btn color="mycolor" dark type="submit">Login</v-btn>
+                <v-btn color="mycolor" dark type="submit">SUBMIT</v-btn>
                 <v-btn flat color="mycolor" light nuxt to="/account/reset-password">Forgot password?</v-btn>
               </v-card-actions>
             </v-form>
           </v-card-text>
         </v-card>
-              <v-card-actions class="sign-up__section">
-                <div>Didn't have an account?</div>
-                <nuxt-link color="mycolor" to="/account/sign-up">Sign up</nuxt-link>
-              </v-card-actions>
+        <v-card-actions class="sign-up__section">
+          <div>Didn't have an account?</div>
+          <nuxt-link color="mycolor" to="/account/sign-up">Sign up</nuxt-link>
+        </v-card-actions>
       </v-flex>
     </v-layout>
   </v-container>
@@ -113,40 +112,40 @@ export default {
 </script>
 
 <style>
-.signin-wrapper{
+.signin-wrapper {
   display: flex;
   align-self: center;
   justify-content: center;
 }
-.signin-wrapper .btn-group{
+.signin-wrapper .btn-group {
   display: flex;
   justify-content: space-between;
 }
-.sign-up__section{
+.sign-up__section {
   margin-top: 25px;
   padding-top: 10px;
   position: relative;
   justify-content: center;
 }
 
-.sign-in__section{
+.sign-in__section {
   justify-content: space-between;
   align-items: baseline;
 
   display: flex;
 }
 .sign-in__section a,
-.sign-up__section a{
+.sign-up__section a {
   transition: 0.3s all ease-in-out;
-  color: #ff4d00 ;
+  color: #ff4d00;
   margin-left: 15px;
 }
 .sign-in__section a:hover,
-.sign-up__section a:hover{
+.sign-up__section a:hover {
   color: black;
 }
-.sign-up__section::before{
-  content: '';
+.sign-up__section::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 50%;
@@ -155,7 +154,7 @@ export default {
   width: 80%;
   transform: translateX(-50%);
 }
-.sign-up__section >div{
+.sign-up__section > div {
   margin: 10px 0;
 }
 </style>

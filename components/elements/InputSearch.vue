@@ -23,7 +23,14 @@
           ></v-select>
         </v-flex>
         <v-flex style="margin:0; padding:0;">
-          <v-btn large depressed style="margin:0; padding:0;" @click="onSubmitSearch">
+          <v-btn
+            large
+            depressed
+            color="mycolor"
+            style="margin:0; padding:0;"
+            dark
+            @click="onSubmitSearch"
+          >
             <v-icon>search</v-icon>
           </v-btn>
         </v-flex>
