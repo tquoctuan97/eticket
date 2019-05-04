@@ -78,13 +78,14 @@ export default {
         .then(result => {
           console.log(result);
           if (result.status_code == "200") {
+            this.$store.commit("setUser", result.data);
             this.fullname = result.data.fullname;
             this.snackbar_success = true;
             this.username = "";
             setTimeout(() => {
               // After waiting for five seconds, submit the form.
               this.$router.push("/");
-            }, 2000);
+            }, 1000);
           }
           if (
             result.status_code == "401" &&

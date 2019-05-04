@@ -68,8 +68,12 @@
       </v-menu>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-md-and-down">
-        <v-btn flat to="/organizer">For Event Organizer</v-btn>
-        <v-btn flat to="/account/sign-in" nuxt>
+        <v-btn v-if="!infoUser.id" flat to="/organizer">For Event Organizer</v-btn>
+        <v-btn v-if="infoUser.id" flat nuxt to="/account/my-account">
+          {{infoUser.fullname}}
+          <v-icon right>account_circle</v-icon>
+        </v-btn>
+        <v-btn v-else flat to="/account/sign-in" nuxt>
           Sign In
           <v-icon right>account_circle</v-icon>
         </v-btn>
@@ -93,6 +97,14 @@ export default {
       { place: "Da Nang", callback: () => console.log("DN") }
     ]
   }),
+  computed: {
+    infoUser() {
+      if (this.$store.getters.loadedUser) {
+        let infoUser = this.$store.getters.loadedUser;
+        return infoUser;
+      }
+    }
+  },
   methods: {
     placeHCM: function(event) {
       this.place = "Ho Chi Minh";

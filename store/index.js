@@ -3,37 +3,41 @@ import Vuex from 'vuex';
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      loadedCategories: []
+      loadedCategories: [],
+      infoUser: []
     },
     mutations: {
-      setEvents(state, events) {
-        state.loadedEvents = events;
+      setCategories(state, categories) {
+        state.loadedCategories = categories;
       },
-      getUpcommingEvents(state, events) {
-        state.upcommingEvents = events;
-      },
-      getFreeEvents(state, events) {
-        state.freeEvents = events;
+      setUser(state, infoUser) {
+        state.infoUser = infoUser;
       }
     },
     actions: {
       nuxtServerInit(vuexContext, context) {
         return context.app.$axios
           .$get(
-            'https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event?limit=6&page=1'
+            'https://eticket-vhu.herokuapp.com/api/v1/eticket/get-categories'
           )
           .then(data => {
-            vuexContext.commit('setEvents', data.data);
+            vuexContext.commit('setCategories', data.data);
           })
           .catch(e => context.error(e));
       },
-      setEvents(vuexContext, events) {
-        vuexContext.commit('setEvents', events);
+      setCategories(vuexContext, categories) {
+        vuexContext.commit('setCategories', categories);
+      },
+      setUser(vuexContext, infoUser) {
+        vuexContext.commit('setUser', infoUser);
       }
     },
     getters: {
       loadedCategories(state) {
         return state.loadedCategories;
+      },
+      loadedUser(state) {
+        return state.infoUser;
       }
     }
   });
