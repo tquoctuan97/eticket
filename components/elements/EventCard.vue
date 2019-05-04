@@ -20,7 +20,13 @@
         <p
           class="post-card__price d-inline-block"
           style="border-color: rgba(255, 77, 0, 0.87); color:#FF4D00;"
+          v-if="post.tickettype.data[0].price > 0"
         >From {{post.tickettype.data[0].price}}</p>
+        <p
+          class="post-card__price d-inline-block"
+          style="background-color:#FF4D00; color:#fff; border-color: rgba(255, 77, 0, 0.87);"
+          v-else
+        >Free</p>
       </div>
     </div>
     <!--news items-->
@@ -34,9 +40,6 @@ export default {
       type: Array,
       required: true
     }
-  },
-  created() {
-    console.log(this.posts);
   }
 };
 </script>

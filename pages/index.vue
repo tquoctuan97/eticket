@@ -1,9 +1,7 @@
 <template>
   <v-app>
-    <!--Main content-->
     <v-content class="main-content">
       <Hero/>
-      <!--list wrapper-->
       <div class="title-box center">
         <h3>Lastest Event</h3>
         <a class="box-see-more" href="#">
@@ -11,32 +9,7 @@
           <v-icon>navigate_next</v-icon>
         </a>
       </div>
-      <div class="list-wrapper center">
-        <!--news items-->
-        <div class="post-card" v-for="post in posts" :key="post.id">
-          <nuxt-link :to="'/event/'+ post.id ">
-            <div
-              :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
-              class="post-card__thumbnai"
-            >
-              <div class="post-read-more">Read More</div>
-              <div class="overlay"></div>
-            </div>
-          </nuxt-link>
-          <nuxt-link :to="'/event/'+ post.id ">
-            <div class="post-card__title">{{ post.title }}</div>
-          </nuxt-link>
-          <p class="post-card__des">{{ post.start_date}} - {{post.start_time}}:00</p>
-          <div class="post-card__further mt-3">
-            <p class="post-card__category d-inline-block mr-2">{{post.category}}</p>
-            <p
-              class="post-card__price d-inline-block"
-              style="border-color: rgba(255, 77, 0, 0.87); color:#FF4D00;"
-            >From {{post.tickettype.data[0].price}}</p>
-          </div>
-        </div>
-        <!--news items-->
-      </div>
+      <EventCard :posts="lastedEvents"/>
       <!--end list wrapper-->
       <!--list wrapper-->
       <div class="title-box center">
@@ -46,32 +19,8 @@
           <v-icon>navigate_next</v-icon>
         </a>
       </div>
-      <div class="list-wrapper center">
-        <!--news items-->
-        <div class="post-card" v-for="post in posts" :key="post.id">
-          <nuxt-link :to="'/event/'+ post.id ">
-            <div
-              :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
-              class="post-card__thumbnai"
-            >
-              <div class="post-read-more">Read More</div>
-              <div class="overlay"></div>
-            </div>
-          </nuxt-link>
-          <nuxt-link :to="'/event/'+ post.id ">
-            <div class="post-card__title">{{ post.title }}</div>
-          </nuxt-link>
-          <p class="post-card__des">{{ post.start_date}} - {{post.start_time}}:00</p>
-          <div class="post-card__further mt-3">
-            <p class="post-card__category d-inline-block mr-2">{{post.category}}</p>
-            <p
-              class="post-card__price d-inline-block"
-              style="border-color: rgba(255, 77, 0, 0.87); color:#FF4D00;"
-            >From {{post.tickettype.data[0].price}}</p>
-          </div>
-        </div>
-        <!--news items-->
-      </div>
+      <EventCard :posts="upcommingEvents"/>
+
       <!--end list wrapper-->
       <!--list wrapper-->
       <div class="title-box center">
@@ -81,53 +30,46 @@
           <v-icon>navigate_next</v-icon>
         </a>
       </div>
-      <div class="list-wrapper center">
-        <!--news items-->
-        <div class="post-card" v-for="post in posts" :key="post.id">
-          <nuxt-link :to="'/event/'+ post.id ">
-            <div
-              :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
-              class="post-card__thumbnai"
-            >
-              <div class="post-read-more">Read More</div>
-              <div class="overlay"></div>
-            </div>
-          </nuxt-link>
-          <nuxt-link :to="'/event/'+ post.id ">
-            <div class="post-card__title">{{ post.title }}</div>
-          </nuxt-link>
-          <p class="post-card__des">{{ post.start_date}} - {{post.start_time}}:00</p>
-          <div class="post-card__further mt-3">
-            <p class="post-card__category d-inline-block mr-2">{{post.category}}</p>
-            <p
-              class="post-card__price d-inline-block"
-              style="border-color: rgba(255, 77, 0, 0.87); color:#FF4D00;"
-            >From {{post.tickettype.data[0].price}}</p>
-          </div>
-        </div>
-        <!--news items-->
-      </div>
-      <!--end list wrapper-->
+      <EventCard :posts="freeEvents"/>
+
       <EventCategory/>
     </v-content>
-    <!--End main content-->
   </v-app>
 </template>
 
 <script>
 import Hero from "@/components/containers/Hero";
 import EventCategory from "@/components/containers/EventCategory.vue";
+import EventCard from "@/components/elements/EventCard.vue";
 import axios from "axios";
 export default {
   components: {
     Hero,
-    EventCategory
+    EventCategory,
+    EventCard
   },
-  async asyncData() {
-    const { data } = await axios.get(
-      "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event?limit=3&page=1"
-    );
-    return { posts: data.data };
+  async asyncData({ query, error }) {
+    let [
+      resLastedEvents,
+      resUpcommingEvents,
+      resFreeEvents,
+      resGetCategories
+    ] = await Promise.all([
+      axios.get(
+        "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event?limit=6&page=1"
+      ),
+      axios.get(
+        "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-in-week?limit=6&page=1"
+      ),
+      axios.get(
+        "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-free?limit=6&page=1"
+      )
+    ]);
+    return {
+      lastedEvents: resLastedEvents.data.data,
+      upcommingEvents: resUpcommingEvents.data.data,
+      freeEvents: resFreeEvents.data.data
+    };
   },
   head() {
     return {
@@ -303,4 +245,4 @@ export default {
     margin: 10px;
   }
 }
-</style>
+</style> 
