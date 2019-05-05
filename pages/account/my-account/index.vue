@@ -15,7 +15,7 @@
       >My Favorite Events</div>
     </div>
     <div class="v-card theme--light elevation-1 tab-content">
-      <UserInfoTab v-if="tabActive=='myinfo'"/>
+      <UserInfoTab v-if="tabActive=='myinfo'" :infoUser="infoUser"/>
       <UserEventTab v-if="tabActive=='mytickets'"/>
       <FavoriteEvent v-if="tabActive=='favevent'"/>
     </div>
@@ -37,6 +37,14 @@ export default {
       tabActive: "myinfo",
       active: ""
     };
+  },
+  computed: {
+    infoUser() {
+      if (this.$store.getters.loadedUser) {
+        let infoUser = this.$store.getters.loadedUser;
+        return infoUser;
+      }
+    }
   }
 };
 </script>
