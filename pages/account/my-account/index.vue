@@ -40,7 +40,7 @@ export default {
       active: ""
     };
   },
-  async asyncData({ query, error }) {
+  async asyncData({ query, error, store }) {
     let [
       resProfileUser,
       resEventTicket,
@@ -53,7 +53,7 @@ export default {
         "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-profile",
         {
           headers: {
-            Authorization: "338c7505-371d-42da-8838-ac58fbdd1885"
+            Authorization: store.state.infoUser.access_token
           }
         }
       ),
@@ -61,7 +61,7 @@ export default {
         "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-my-ticket?limit=10&page=1",
         {
           headers: {
-            Authorization: "338c7505-371d-42da-8838-ac58fbdd1885"
+            Authorization: store.state.infoUser.access_token
           }
         }
       ),
@@ -69,7 +69,7 @@ export default {
         "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-of-client-follow?limit=10&page=1",
         {
           headers: {
-            Authorization: "338c7505-371d-42da-8838-ac58fbdd1885"
+            Authorization: store.state.infoUser.access_token
           }
         }
       )
