@@ -13,7 +13,7 @@
     <!-- Info section -->
     <section>
       <div class="section-title">
-        <div>Information {{infoUser.fullname}}</div>
+        <div>Information</div>
         <div class="title-btn-wapper">
           <button v-if="enableInputInfo == false" @click="enableInputInfo = true">
             <v-icon>edit</v-icon>
@@ -32,32 +32,36 @@
             color="#ff9d72"
             label="First name"
             :disabled="!enableInputInfo"
-            v-model="first_name"
+            v-model="profileUser.first_name"
           ></v-text-field>
           <v-text-field
             color="#ff9d72"
             :disabled="!enableInputInfo"
-            v-model="last_name"
+            v-model="profileUser.last_name"
             label="Last name"
           ></v-text-field>
         </div>
         <div class="input-50">
           <v-select
             color="#ff9d72"
-            v-model="gender"
+            v-model="profileUser.gender"
             :disabled="!enableInputInfo"
             :items="gender_arr"
             label="Gender"
           ></v-select>
           <v-text-field
-            v-model="dob"
+            v-model="profileUser.dob"
             color="#ff9d72"
             label="D.O.B"
-            type="date"
             :disabled="!enableInputInfo"
           ></v-text-field>
         </div>
-        <v-textarea color="#ff9d72" v-model="bio" label="Bio" :disabled="!enableInputInfo"></v-textarea>
+        <v-textarea
+          color="#ff9d72"
+          v-model="profileUser.bio"
+          label="Bio"
+          :disabled="!enableInputInfo"
+        ></v-textarea>
 
         <!-- Change pass dialog -->
         <v-dialog v-model="dialog" width="350">
@@ -122,13 +126,13 @@
           <v-text-field
             color="#ff9d72"
             :disabled="!enableInputContact"
-            v-model="post_code"
+            v-model="profileUser.post_code"
             label="Post code"
           ></v-text-field>
           <v-text-field
             color="#ff9d72"
             :disabled="!enableInputContact"
-            v-model="phone_number"
+            v-model="profileUser.phone_number"
             label="Phone number"
           ></v-text-field>
         </div>
@@ -136,14 +140,14 @@
           color="#ff9d72"
           label="Address"
           :disabled="!enableInputContact"
-          v-model="address"
+          v-model="profileUser.address"
         ></v-text-field>
-        <v-text-field
+        <!-- <v-text-field
           color="#ff9d72"
           :disabled="!enableInputContact"
-          v-model="company"
+          v-model="profileUser.company"
           label="Company"
-        ></v-text-field>
+        ></v-text-field>-->
       </div>
     </section>
     <!-- Ví -->
@@ -152,7 +156,7 @@
         <div>My wallet</div>
       </div>
       <div class="section-content">
-        <v-text-field color="#ff9d72" disabled v-model="wallet" label="Account balance"></v-text-field>
+        <v-text-field color="#ff9d72" disabled v-model="profileUser.cash" label="Account balance"></v-text-field>
       </div>
     </section>
   </v-card-text>
@@ -164,6 +168,10 @@ import axios from "axios";
 export default {
   props: {
     infoUser: {
+      type: Object,
+      required: true
+    },
+    profileUser: {
       type: Object,
       required: true
     }
@@ -198,6 +206,9 @@ export default {
       confirm_pass: ""
     };
   },
+  // created() {
+  //   this.first_name = profileUser.first_name;
+  // },
   methods: {
     changeAvatarHandle() {
       console.log("change avatar handle");

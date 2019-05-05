@@ -15,7 +15,7 @@
       >My Favorite Events</div>
     </div>
     <div class="v-card theme--light elevation-1 tab-content">
-      <UserInfoTab v-if="tabActive=='myinfo'" :infoUser="infoUser"/>
+      <UserInfoTab v-if="tabActive=='myinfo'" :infoUser="infoUser" :profileUser="profileUser"/>
       <UserEventTab v-if="tabActive=='mytickets'"/>
       <FavoriteEvent v-if="tabActive=='favevent'"/>
     </div>
@@ -26,6 +26,8 @@
 import UserInfoTab from "../../../components/elements/UserInfoTab.vue";
 import UserEventTab from "../../../components/elements/UserEventTab.vue";
 import FavoriteEvent from "../../../components/elements/FavoriteEvent.vue";
+import axios from "axios";
+
 export default {
   components: {
     UserInfoTab,
@@ -36,6 +38,39 @@ export default {
     return {
       tabActive: "myinfo",
       active: ""
+    };
+  },
+  async asyncData({ query, error }) {
+    let [
+      resProfileUser
+      // resUpcommingEvents,
+      // resFreeEvents,
+      // resGetCategories
+    ] = await Promise.all([
+      axios.get(
+        "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-profile",
+        {
+          headers: {
+            Authorization: "bd627587-9438-4ea4-a680-1a2581bb13db"
+          }
+        }
+      )
+      // axios.get(
+      //   "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-in-week?limit=6&page=1"
+      // ),
+      // axios.get(
+      //   "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-free?limit=6&page=1"
+      // )
+    ]);
+    return {
+      profileUser: resProfileUser.data.data
+      // upcommingEvents: resUpcommingEvents.data.data,
+      // freeEvents: resFreeEvents.data.data
+    };
+  },
+  head() {
+    return {
+      title: "My Account"
     };
   },
   computed: {
