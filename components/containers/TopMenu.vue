@@ -86,6 +86,7 @@
 export default {
   data: () => ({
     drawer: null,
+    dropdown_font: ["Arial", "Calibri", "Courier", "Verdana"],
     links: [
       { title: "Home", icon: "dashboard", linkTo: "/" },
       { title: "About", icon: "question_answer", linkTo: "/sign-in" }
