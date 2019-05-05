@@ -16,7 +16,7 @@
     </div>
     <div class="v-card theme--light elevation-1 tab-content">
       <UserInfoTab v-if="tabActive=='myinfo'" :infoUser="infoUser" :profileUser="profileUser"/>
-      <UserEventTab v-if="tabActive=='mytickets'"/>
+      <UserEventTab v-if="tabActive=='mytickets'" :posts="eventTicket"/>
       <FavoriteEvent v-if="tabActive=='favevent'"/>
     </div>
   </div>
@@ -42,13 +42,22 @@ export default {
   },
   async asyncData({ query, error }) {
     let [
-      resProfileUser
+      resProfileUser,
+      resEventTicket
       // resUpcommingEvents,
       // resFreeEvents,
       // resGetCategories
     ] = await Promise.all([
       axios.get(
         "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-profile",
+        {
+          headers: {
+            Authorization: "bd627587-9438-4ea4-a680-1a2581bb13db"
+          }
+        }
+      ),
+      axios.get(
+        "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-my-ticket?limit=10&page=1",
         {
           headers: {
             Authorization: "bd627587-9438-4ea4-a680-1a2581bb13db"
@@ -63,7 +72,8 @@ export default {
       // )
     ]);
     return {
-      profileUser: resProfileUser.data.data
+      profileUser: resProfileUser.data.data,
+      eventTicket: resEventTicket.data.data
       // upcommingEvents: resUpcommingEvents.data.data,
       // freeEvents: resFreeEvents.data.data
     };
