@@ -17,7 +17,7 @@
     <div class="v-card theme--light elevation-1 tab-content">
       <UserInfoTab v-if="tabActive=='myinfo'" :infoUser="infoUser" :profileUser="profileUser"/>
       <UserEventTab v-if="tabActive=='mytickets'" :posts="eventTicket"/>
-      <FavoriteEvent v-if="tabActive=='favevent'"/>
+      <FavoriteEvent v-if="tabActive=='favevent'" :posts="eventFollow"/>
     </div>
   </div>
 </template>
@@ -43,7 +43,8 @@ export default {
   async asyncData({ query, error }) {
     let [
       resProfileUser,
-      resEventTicket
+      resEventTicket,
+      resEventFollow
       // resUpcommingEvents,
       // resFreeEvents,
       // resGetCategories
@@ -52,7 +53,7 @@ export default {
         "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-profile",
         {
           headers: {
-            Authorization: "bd627587-9438-4ea4-a680-1a2581bb13db"
+            Authorization: "338c7505-371d-42da-8838-ac58fbdd1885"
           }
         }
       ),
@@ -60,20 +61,23 @@ export default {
         "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-my-ticket?limit=10&page=1",
         {
           headers: {
-            Authorization: "bd627587-9438-4ea4-a680-1a2581bb13db"
+            Authorization: "338c7505-371d-42da-8838-ac58fbdd1885"
+          }
+        }
+      ),
+      axios.get(
+        "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-of-client-follow?limit=10&page=1",
+        {
+          headers: {
+            Authorization: "338c7505-371d-42da-8838-ac58fbdd1885"
           }
         }
       )
-      // axios.get(
-      //   "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-in-week?limit=6&page=1"
-      // ),
-      // axios.get(
-      //   "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-free?limit=6&page=1"
-      // )
     ]);
     return {
       profileUser: resProfileUser.data.data,
-      eventTicket: resEventTicket.data.data
+      eventTicket: resEventTicket.data.data,
+      eventFollow: resEventFollow.data.data
       // upcommingEvents: resUpcommingEvents.data.data,
       // freeEvents: resFreeEvents.data.data
     };
