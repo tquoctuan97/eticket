@@ -4,7 +4,9 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       loadedCategories: [],
-      infoUser: []
+      infoUser: {
+        access_token: null
+      }
     },
     mutations: {
       setCategories(state, categories) {

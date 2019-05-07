@@ -41,46 +41,48 @@ export default {
     };
   },
   async asyncData({ query, error, store }) {
-    let [
-      resProfileUser,
-      resEventTicket,
-      resEventFollow
-      // resUpcommingEvents,
-      // resFreeEvents,
-      // resGetCategories
-    ] = await Promise.all([
-      axios.get(
-        "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-profile",
-        {
-          headers: {
-            Authorization: store.state.infoUser.access_token
+    if (store.state.infoUser.access_token != null) {
+      let [
+        resProfileUser,
+        resEventTicket,
+        resEventFollow
+        // resUpcommingEvents,
+        // resFreeEvents,
+        // resGetCategories
+      ] = await Promise.all([
+        axios.get(
+          "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-profile",
+          {
+            headers: {
+              Authorization: store.state.infoUser.access_token
+            }
           }
-        }
-      ),
-      axios.get(
-        "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-my-ticket?limit=10&page=1",
-        {
-          headers: {
-            Authorization: store.state.infoUser.access_token
+        ),
+        axios.get(
+          "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-my-ticket?limit=10&page=1",
+          {
+            headers: {
+              Authorization: store.state.infoUser.access_token
+            }
           }
-        }
-      ),
-      axios.get(
-        "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-of-client-follow?limit=10&page=1",
-        {
-          headers: {
-            Authorization: store.state.infoUser.access_token
+        ),
+        axios.get(
+          "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-of-client-follow?limit=10&page=1",
+          {
+            headers: {
+              Authorization: store.state.infoUser.access_token
+            }
           }
-        }
-      )
-    ]);
-    return {
-      profileUser: resProfileUser.data.data,
-      eventTicket: resEventTicket.data.data,
-      eventFollow: resEventFollow.data.data
-      // upcommingEvents: resUpcommingEvents.data.data,
-      // freeEvents: resFreeEvents.data.data
-    };
+        )
+      ]);
+      return {
+        profileUser: resProfileUser.data.data,
+        eventTicket: resEventTicket.data.data,
+        eventFollow: resEventFollow.data.data
+        // upcommingEvents: resUpcommingEvents.data.data,
+        // freeEvents: resFreeEvents.data.data
+      };
+    }
   },
   head() {
     return {

@@ -18,8 +18,8 @@
     </div>
 
     <v-container grid-list-lg>
-      <v-layout>
-        <v-flex lg8>
+      <v-layout wrap>
+        <v-flex xs12 order-xs2 sm12 lg8 order-lg1>
           <!-- About -->
           <v-card class="mb-5 elevation-1">
             <v-card-title class="headline">About</v-card-title>
@@ -63,9 +63,9 @@
           <p style="display:none">{{checkTicket}}</p>
           <p style="display:none">{{checkLiked}}</p>
         </v-flex>
-        <v-flex lg4 hidden-md-and-down class="ml-3">
+        <v-flex xs12 order-xs1 sm12 lg4 order-lg2 class="mb-2">
           <v-card class="elevation-1">
-            <v-card-title class="headline" style="font-weight: 600">{{event.title}}</v-card-title>
+            <v-card-title class="headline" style="font-weight: 600">Information Event</v-card-title>
             <v-divider></v-divider>
             <v-card-text>
               <div class="event__information__item">
@@ -93,7 +93,23 @@
               <v-divider></v-divider>
               <v-layout class="mt-2 mb-2">
                 <v-flex lg4>
-                  <v-btn flat color class="event__action__item" @click="onClickLike">
+                  <v-btn
+                    v-if="isSignIn==null"
+                    flat
+                    color
+                    class="event__action__item"
+                    @click="goToSignIn"
+                  >
+                    <v-icon>favorite_border</v-icon>
+                    <span>Like</span>
+                  </v-btn>
+                  <v-btn
+                    v-if="isSignIn!=null"
+                    flat
+                    color
+                    class="event__action__item"
+                    @click="onClickLike"
+                  >
                     <v-icon v-if="isLiked">favorite</v-icon>
                     <v-icon v-else>favorite_border</v-icon>
                     <span v-if="isLiked">Liked</span>
@@ -125,7 +141,7 @@
                         <v-card-actions>
                           <v-spacer></v-spacer>
 
-                          <v-btn color="green darken-1" flat="flat" @click="dialog = false">Close</v-btn>
+                          <v-btn color="green " flat="flat" @click="dialog = false">Close</v-btn>
                         </v-card-actions>
                       </v-card>
                     </v-dialog>
@@ -152,7 +168,6 @@
               <v-divider></v-divider>
             </v-card-text>
             <!-- Button Mua Ve -->
-
             <v-card-actions>
               <!-- Đã mua -->
               <v-dialog v-if="isBought" v-model="dialog_viewTicket" max-width="600px">
@@ -161,30 +176,55 @@
                 </template>
                 <v-card>
                   <v-card-title>
-                    <span class="headline">{{checkTicket.title}}</span>
+                    <span class="headline">{{event.title}}</span>
                   </v-card-title>
                   <v-divider></v-divider>
                   <v-card-text>
-                    <VueQRCodeComponent :text="checkTicket.qr_code"/>
+                    <div
+                      style="display:flex; justify-content:center; align-items: center; flex-direction: column;"
+                      class="pa-4"
+                    >
+                      <VueQRCodeComponent
+                        v-if="checkTicket"
+                        :size="150"
+                        :text="checkTicket.qr_code"
+                      />
+                      <VueQRCodeComponent v-else :size="150" text="Hello eTicket"/>
+                      <p
+                        class="mt-2 d-inline-block"
+                        v-if="checkTicket"
+                        style="border: 1px solid rgba(255, 77, 0, 0.87); border-radius: 2px; user-select:none; cursor: pointer; color: rgb(255, 77, 0); padding: 7px 5px"
+                      >{{checkTicket.status}}</p>
+                      <p
+                        class="mt-2 d-inline-block"
+                        v-else
+                        style="border: 1px solid rgba(255, 77, 0, 0.87); border-radius: 2px; user-select:none; cursor: pointer; color: rgb(255, 77, 0); padding: 7px 5px"
+                      >Unscanned</p>
+                    </div>
+
                     <div class="event__information__item">
                       <v-icon left>calendar_today</v-icon>
                       <div>
-                        <p>{{checkTicket.start_date}}</p>
-                        <p>{{checkTicket.start_time}}:00 - {{checkTicket.end_time}}:00</p>
+                        <p>{{event.start_date}}</p>
+                        <p>{{event.start_time}}:00 - {{event.end_time}}:00</p>
                       </div>
                     </div>
                     <div class="event__information__item">
                       <v-icon left>location_city</v-icon>
                       <div>
-                        <p>{{checkTicket.locationName }}</p>
-                        <p>{{checkTicket.address}}</p>
+                        <p>{{event.locationName }}</p>
+                        <p>{{event.address}}</p>
                       </div>
                     </div>
                   </v-card-text>
                   <v-card-actions>
-                    <v-btn dark color="error darken-1" @click="onBuyTicket">Ticket refund</v-btn>
+                    <v-btn
+                      dark
+                      color="error "
+                      @click="dialog_viewTicket= false; dialog_refundTicket=true; "
+                    >Ticket refund</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" flat @click="dialog_viewTicket=false">Close</v-btn>
+                    <v-btn color="blue " flat @click="dialog_viewTicket=false">Close</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -193,7 +233,31 @@
                 <template v-slot:activator="{ on }">
                   <v-btn large block color="mycolor" dark v-on="on">GET TICKET NOW</v-btn>
                 </template>
-                <v-card>
+                <v-card v-if="isSignIn==null">
+                  <v-card-title>
+                    <span class="headline">Buy ticket</span>
+                  </v-card-title>
+                  <v-divider></v-divider>
+                  <v-card-text>
+                    <v-radio-group v-model="radioGroup">
+                      <v-radio
+                        v-for="ticket in tickets"
+                        :key="ticket.id"
+                        :label="`${ticket.name} $${ticket.price}`"
+                        :value="ticket.id"
+                        disabled
+                      ></v-radio>
+                    </v-radio-group>
+                    <div v-if="messages==='Successfully'" style="color: #4CAF50">{{messages}}</div>
+                    <div v-else class="dialog-message" style="color: #FF5252">{{messages}}</div>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-btn color="blue " flat @click="dialog_buyTicket = false">Close</v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn dark color="mycolor" nuxt to="/account/sign-in">Please Sign In Before</v-btn>
+                  </v-card-actions>
+                </v-card>
+                <v-card v-if="isSignIn!=null">
                   <v-card-title>
                     <span class="headline">Buy ticket</span>
                   </v-card-title>
@@ -211,9 +275,29 @@
                     <div v-else class="dialog-message" style="color: #FF5252">{{messages}}</div>
                   </v-card-text>
                   <v-card-actions>
-                    <v-btn color="blue darken-1" flat @click="dialog_buyTicket = false">Close</v-btn>
+                    <v-btn color="blue " flat @click="dialog_buyTicket = false">Close</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn dark color="mycolor darken-1" @click="onBuyTicket">Pay Now</v-btn>
+                    <v-btn dark color="mycolor " @click="onBuyTicket">Pay Now</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <!-- Hủy mua vé -->
+              <v-dialog v-model="dialog_refundTicket" max-width="400px">
+                <v-card>
+                  <v-card-title class="headline" color="error">Are You Sure Refund This Ticket?</v-card-title>
+
+                  <v-card-text>This operation after completion will refund the ticket. You will not be able to undo.</v-card-text>
+
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn
+                      color
+                      flat="flat"
+                      @click="dialog_refundTicket=false; dialog_viewTicket= true;"
+                    >Cancel</v-btn>
+
+                    <v-btn color="error " flat="flat" @click="onRefundTicket">Agree</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -235,11 +319,13 @@ export default {
   },
   data() {
     return {
+      isSignIn: "",
       isLiked: "",
       isBought: "",
       dialog: false,
       dialog_buyTicket: false,
       dialog_viewTicket: false,
+      dialog_refundTicket: false,
       messages: "",
       radioGroup: ""
     };
@@ -248,17 +334,7 @@ export default {
     return !isNaN(+params.id);
   },
   async asyncData({ params, query, error, store }) {
-    if (store.state.infoUser == null) {
-      let [resEventDetail, resEventTicket, resEventFollow] = await Promise.all([
-        axios.get(
-          `https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-by-id?event_id=${+params.id}`
-        )
-      ]);
-      return {
-        event: resEventDetail.data.data[0],
-        tickets: resEventDetail.data.data[0].tickettype.data
-      };
-    } else {
+    if (store.state.infoUser.access_token != null) {
       let [resEventDetail, resEventTicket, resEventFollow] = await Promise.all([
         axios.get(
           `https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-by-id?event_id=${+params.id}`
@@ -286,25 +362,44 @@ export default {
         eventTickets: resEventTicket.data.data,
         eventFollowes: resEventFollow.data.data
       };
+    } else {
+      let [resEventDetail, resEventTicket, resEventFollow] = await Promise.all([
+        axios.get(
+          `https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-by-id?event_id=${+params.id}`
+        )
+      ]);
+      return {
+        event: resEventDetail.data.data[0],
+        tickets: resEventDetail.data.data[0].tickettype.data
+      };
     }
   },
   computed: {
+    checkSignIn() {
+      if (this.$store.state.infoUser.access_token != null) {
+        isSignIn = true;
+      }
+    },
     checkTicket() {
-      let checkedTicket = this.eventTickets.find(
-        eventTicket => eventTicket["id_event"] === this.event.id
-      );
-      if (checkedTicket != null) {
-        this.isBought = true;
-        return checkedTicket;
+      if (this.$store.state.infoUser.access_token != null) {
+        let checkedTicket = this.eventTickets.find(
+          eventTicket => eventTicket["id_event"] === this.event.id
+        );
+        if (checkedTicket != null) {
+          this.isBought = true;
+          return checkedTicket;
+        }
       }
     },
     checkLiked() {
-      let checkedLike = this.eventFollowes.find(
-        eventFollow => eventFollow["id"] === this.event.id
-      );
-      if (checkedLike != null) {
-        this.isLiked = true;
-        return checkedLike;
+      if (this.$store.state.infoUser.access_token != null) {
+        let checkedLike = this.eventFollowes.find(
+          eventFollow => eventFollow["id"] === this.event.id
+        );
+        if (checkedLike != null) {
+          this.isLiked = true;
+          return checkedLike;
+        }
       }
     }
   },
@@ -314,78 +409,109 @@ export default {
     };
   },
   methods: {
+    goToSignIn() {
+      alert("Please login before implementation");
+      this.$router.push("/account/sign-in");
+    },
     onBuyTicket() {
-      let idEvent = this.event.id;
-      let idTypeTicket = this.radioGroup;
-      let token = this.$store.state.infoUser.access_token;
-      console.log("idEvent: " + idEvent);
-      console.log("idTypeTicket: " + idEvent);
-      console.log("token: " + token);
-      if (idEvent && idTypeTicket) {
-        axios
-          .post(
-            "https://eticket-vhu.herokuapp.com/api/v1/eticket/buy-ticket",
-            {
-              event_id: idEvent,
-              type_id: idTypeTicket
-            },
-            {
-              headers: {
-                Authorization: token
+      if (this.$store.state.infoUser.access_token != null) {
+        let idEvent = this.event.id;
+        let idTypeTicket = this.radioGroup;
+        let token = this.$store.state.infoUser.access_token;
+        if (idEvent && idTypeTicket) {
+          axios
+            .post(
+              "https://eticket-vhu.herokuapp.com/api/v1/eticket/buy-ticket",
+              {
+                event_id: idEvent,
+                type_id: idTypeTicket
+              },
+              {
+                headers: {
+                  Authorization: token
+                }
               }
-            }
-          )
-          .then(response => {
-            console.log(response.data);
-            // setTimeout(() => {
-            //   this.dialog = false;
-            //   this.error = "";
-            // }, 2000);
-          })
-          .catch(e => {
-            console.log(e.data);
-          });
+            )
+            .then(response => {
+              console.log(response.data);
+              this.isBought = true;
+              this.dialog_buyTicket = false;
+              this.dialog_viewTicket = false;
+            })
+            .catch(e => {
+              console.log(e.data);
+            });
+        }
       }
-
-      // console.log(this.radioGroup);
     },
     onClickLike() {
-      let token = this.$store.state.infoUser.access_token;
-      console.log(token);
-      if (this.isLiked == true) {
-        axios
-          .post(
-            "https://eticket-vhu.herokuapp.com/api/v1/eticket/un-follow-event",
-            {
-              event_id: this.event.id
-            },
-            {
-              headers: {
-                Authorization: token
+      if (this.$store.state.infoUser.access_token != null) {
+        let token = this.$store.state.infoUser.access_token;
+        console.log(token);
+        if (this.isLiked == true) {
+          axios
+            .post(
+              "https://eticket-vhu.herokuapp.com/api/v1/eticket/un-follow-event",
+              {
+                event_id: this.event.id
+              },
+              {
+                headers: {
+                  Authorization: token
+                }
               }
-            }
-          )
-          .then(response => {
-            this.isLiked = false;
-            console.log("unlike");
-          });
-      } else {
-        axios
-          .post(
-            "https://eticket-vhu.herokuapp.com/api/v1/eticket/follow-event",
-            {
-              event_id: this.event.id
-            },
-            {
-              headers: {
-                Authorization: token
+            )
+            .then(response => {
+              this.isLiked = false;
+              console.log("unlike");
+            });
+        } else {
+          axios
+            .post(
+              "https://eticket-vhu.herokuapp.com/api/v1/eticket/follow-event",
+              {
+                event_id: this.event.id
+              },
+              {
+                headers: {
+                  Authorization: token
+                }
               }
-            }
-          )
-          .then(response => {
-            this.isLiked = true;
-            console.log("liked");
-          });
+            )
+            .then(response => {
+              this.isLiked = true;
+              console.log("liked");
+            });
+        }
+      }
+    },
+    onRefundTicket() {
+      if (this.$store.state.infoUser.access_token != null) {
+        let ticketId = this.checkTicket.id;
+        let token = this.$store.state.infoUser.access_token;
+        if (ticketId) {
+          axios
+            .post(
+              "https://eticket-vhu.herokuapp.com/api/v1/eticket/destroy-ticket",
+              {
+                ticketId: ticketId
+              },
+              {
+                headers: {
+                  Authorization: token
+                }
+              }
+            )
+            .then(response => {
+              console.log(response.data);
+              this.dialog_refundTicket = false;
+              this.isBought = false;
+              alert("Refund Successfully");
+            })
+            .catch(e => {
+              console.log(e.data);
+            });
+        }
       }
     }
   }
