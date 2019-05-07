@@ -1,7 +1,23 @@
 <template>
   <v-app>
     <v-content class="main-content">
-      <Hero/>
+      <div class="hero-img">
+        <h1 class="hero-title">
+          Discover Events
+          In Ho Chi Minh City
+        </h1>
+        <p class="hero-people-looking">
+          People are looking:
+          <span
+            style="font-weight: bold"
+          >Color Me Run 2019, Full Stack or DevOps, VIETNAM CHAMPIONSHIP...</span>
+        </p>
+        <InputSearch @search="onClickSearch"/>
+      </div>
+      <div v-if="resSearch!=null" class="title-box center">
+        <h3 class="headline">Response Search</h3>
+      </div>
+      <EventCard v-if="resSearch!=null" :posts="resSearch"/>
       <div class="title-box center">
         <h3 class="headline">Lastest Event</h3>
         <a class="box-see-more" href="#">
@@ -38,13 +54,18 @@
 </template>
 
 <script>
-import Hero from "@/components/containers/Hero";
+import InputSearch from "@/components/elements/InputSearch";
 import EventCategory from "@/components/containers/EventCategory.vue";
 import EventCard from "@/components/elements/EventCard.vue";
 import axios from "axios";
 export default {
+  data() {
+    return {
+      resSearch: null
+    };
+  },
   components: {
-    Hero,
+    InputSearch,
     EventCategory,
     EventCard
   },
@@ -71,6 +92,15 @@ export default {
       freeEvents: resFreeEvents.data.data
     };
   },
+  methods: {
+    onClickSearch(resSearch) {
+      this.resSearch = null;
+      setTimeout(() => {
+        // After waiting for five seconds, submit the form.
+        this.resSearch = resSearch;
+      }, 3000);
+    }
+  },
   head() {
     return {
       title: "Home"
@@ -93,6 +123,24 @@ export default {
 .center {
   width: 1440px;
   margin: 0 auto;
+}
+.hero-img {
+  background-image: url("/bg-hero-eticket.jpg");
+  background-size: cover;
+  width: 100%;
+  height: 386px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero-title {
+  color: white;
+}
+
+.hero-people-looking {
+  padding-top: 20px;
+  color: white;
 }
 .title-box {
   display: flex;
