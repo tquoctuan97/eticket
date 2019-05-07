@@ -6,11 +6,7 @@
       class="hero-img"
       fluid
     ></v-container>
-    <div
-      class="mb-5"
-      style="background-color:white;   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);"
-    >
+    <div class="mb-5 header" style="background-color:white;">
       <v-container>
         <v-layout wrap>
           <v-flex xs12 lg8>
@@ -25,7 +21,7 @@
       <v-layout>
         <v-flex lg8>
           <!-- About -->
-          <v-card elevation="1" class="mb-5">
+          <v-card class="mb-5 elevation-1">
             <v-card-title class="headline">About</v-card-title>
             <v-divider></v-divider>
             <v-card-text>
@@ -34,7 +30,7 @@
           </v-card>
           <!-- Price -->
 
-          <v-card elevation="1" class="mb-5">
+          <v-card class="mb-5 elevation-1">
             <v-card-title class="headline">Event Price</v-card-title>
             <v-divider></v-divider>
 
@@ -51,7 +47,7 @@
             </v-expansion-panel>
           </v-card>
           <!-- Contact -->
-          <v-card elevation="1" class="mb-5">
+          <v-card class="mb-5 elevation-1">
             <v-card-title class="headline">Contact</v-card-title>
             <v-divider></v-divider>
             <v-card-text>
@@ -64,9 +60,10 @@
               </v-btn>
             </v-card-text>
           </v-card>
+          <pre>{{checkLiked}}</pre>
         </v-flex>
-        <v-flex hidden-md-and-down class="ml-3">
-          <v-card elevation="1">
+        <v-flex lg4 hidden-md-and-down class="ml-3">
+          <v-card class="elevation-1">
             <v-card-title class="headline" style="font-weight: 600">{{event.title}}</v-card-title>
             <v-divider></v-divider>
             <v-card-text>
@@ -96,9 +93,9 @@
               <v-layout class="mt-2 mb-2">
                 <v-flex lg4>
                   <v-btn flat color class="event__action__item" @click="onClickLike">
-                    <v-icon v-if="isLike">favorite</v-icon>
+                    <v-icon v-if="isLiked">favorite</v-icon>
                     <v-icon v-else>favorite_border</v-icon>
-                    <span v-if="isLike">Liked</span>
+                    <span v-if="isLiked">Liked</span>
                     <span v-else>Like</span>
                   </v-btn>
                 </v-flex>
@@ -155,7 +152,7 @@
             </v-card-text>
             <!-- Button Mua Ve -->
             <v-card-actions>
-              <v-dialog v-model="dialog_buyTicket" max-width="600px">
+              <v-dialog v-if="isBought==fasle" v-model="dialog_buyTicket" max-width="600px">
                 <template v-slot:activator="{ on }">
                   <v-btn large block color="mycolor" dark v-on="on">GET TICKET NOW</v-btn>
                 </template>
@@ -166,13 +163,44 @@
                   <v-divider></v-divider>
                   <v-card-text>
                     <v-radio-group v-model="radioGroup">
-                      <v-radio v-for="n in 3" :key="n" :label="`Radio ${n}`" :value="n"></v-radio>
+                      <v-radio
+                        v-for="ticket in tickets"
+                        :key="ticket.id"
+                        :label="`${ticket.name} $${ticket.price}`"
+                        :value="ticket.id"
+                      ></v-radio>
                     </v-radio-group>
                   </v-card-text>
                   <v-card-actions>
                     <v-btn color="blue darken-1" flat @click="dialog_buyTicket = false">Close</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn dark color="mycolor darken-1" @click="dialog_buyTicket = false">Pay Now</v-btn>
+                    <v-btn dark color="mycolor darken-1" @click="onBuyTicket">Pay Now</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+              <v-dialog v-else v-model="dialog_viewTicket" max-width="600px">
+                <template v-slot:activator="{ on }">
+                  <v-btn large block color="success" dark v-on="on">VIEW YOUR TICKET</v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">Buy ticket</span>
+                  </v-card-title>
+                  <v-divider></v-divider>
+                  <v-card-text>
+                    <v-radio-group v-model="radioGroup">
+                      <v-radio
+                        v-for="ticket in tickets"
+                        :key="ticket.id"
+                        :label="`${ticket.name} $${ticket.price}`"
+                        :value="ticket.id"
+                      ></v-radio>
+                    </v-radio-group>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-btn color="blue darken-1" flat @click="dialog_buyTicket = false">Close</v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn dark color="error darken-1" @click="onBuyTicket">Ticket refund</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -190,64 +218,153 @@ import axios from "axios";
 export default {
   data() {
     return {
-      isLike: false,
+      isLiked: "",
+      isBought: "",
       dialog: false,
-      dialog_buyTicket: false
+      dialog_buyTicket: false,
+      radioGroup: ""
     };
-  },
-  methods: {
-    onClickLike() {
-      if (!this.isLike) {
-        axios
-          .post(
-            "https://eticket-vhu.herokuapp.com/api/v1/eticket/follow-event?event_id=" +
-              this.event.id,
-            {
-              headers: {
-                Authorization: "338c7505-371d-42da-8838-ac58fbdd1885"
-              }
-            }
-          )
-          .then(response => {
-            console.log(response.data);
-            this.isLike = true;
-          });
-      } else {
-        axios
-          .post(
-            "https://eticket-vhu.herokuapp.com/api/v1/eticket/un-follow-event?event_id=" +
-              this.event.id,
-            {
-              headers: {
-                Authorization: "338c7505-371d-42da-8838-ac58fbdd1885"
-              }
-            }
-          )
-          .then(response => {
-            console.log(response.data);
-            this.isLike = false;
-          });
-      }
-    }
   },
   validate({ params }) {
     return !isNaN(+params.id);
   },
-
-  async asyncData({ params, error }) {
-    try {
-      const { data } = await axios.get(
-        `https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-by-id?event_id=${+params.id}`
+  async asyncData({ params, query, error, store }) {
+    if (store.state.infoUser == null) {
+      let [resEventDetail, resEventTicket, resEventFollow] = await Promise.all([
+        axios.get(
+          `https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-by-id?event_id=${+params.id}`
+        )
+      ]);
+      return {
+        event: resEventDetail.data.data[0],
+        tickets: resEventDetail.data.data[0].tickettype.data
+      };
+    } else {
+      let [resEventDetail, resEventTicket, resEventFollow] = await Promise.all([
+        axios.get(
+          `https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-by-id?event_id=${+params.id}`
+        ),
+        axios.get(
+          "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-my-ticket?limit=10&page=1",
+          {
+            headers: {
+              Authorization: store.state.infoUser.access_token
+            }
+          }
+        ),
+        axios.get(
+          "https://eticket-vhu.herokuapp.com/api/v1/eticket/get-event-of-client-follow?limit=10&page=1",
+          {
+            headers: {
+              Authorization: store.state.infoUser.access_token
+            }
+          }
+        )
+      ]);
+      return {
+        event: resEventDetail.data.data[0],
+        tickets: resEventDetail.data.data[0].tickettype.data,
+        eventTickets: resEventTicket.data.data,
+        eventFollowes: resEventFollow.data.data
+      };
+    }
+  },
+  computed: {
+    checkTicket() {
+      return this.eventTickets.find(
+        eventTicket => eventTicket["id_event"] === this.event.id
       );
-      return { event: data.data[0], tickets: data.data[0].tickettype.data };
-    } catch (e) {
-      error({ message: "Không tìm thấy event", statusCode: 404 });
+    },
+    checkLiked() {
+      let checked = this.eventFollowes.find(
+        eventFollow => eventFollow["id"] === this.event.id
+      );
+      if (checked != null) {
+        this.isLiked = true;
+        return checked;
+      }
     }
   },
   head() {
     return {
       title: this.event.title
     };
+  },
+  methods: {
+    onBuyTicket() {
+      let idEvent = this.event.id;
+      let idTypeTicket = this.radioGroup;
+      let token = this.$store.state.infoUser.access_token;
+      console.log("idEvent: " + idEvent);
+      console.log("idTypeTicket: " + idEvent);
+      console.log("token: " + token);
+      if (idEvent && idTypeTicket) {
+        axios
+          .post(
+            "https://eticket-vhu.herokuapp.com/api/v1/eticket/buy-ticket",
+            {
+              event_id: idEvent,
+              type_id: idTypeTicket
+            },
+            {
+              headers: {
+                Authorization: token
+              }
+            }
+          )
+          .then(response => {
+            console.log(response.data);
+            // setTimeout(() => {
+            //   this.dialog = false;
+            //   this.error = "";
+            // }, 2000);
+          })
+          .catch(e => {
+            console.log(e.data);
+          });
+      }
+
+      // console.log(this.radioGroup);
+    },
+    onClickLike() {
+      let token = this.$store.state.infoUser.access_token;
+      console.log(token);
+      if (this.isLiked == true) {
+        axios
+          .post(
+            "https://eticket-vhu.herokuapp.com/api/v1/eticket/un-follow-event",
+            {
+              event_id: this.event.id
+            },
+            {
+              headers: {
+                Authorization: token
+              }
+            }
+          )
+          .then(response => {
+            this.isLiked = false;
+            console.log("unlike");
+          });
+      } else {
+        axios
+          .post(
+            "https://eticket-vhu.herokuapp.com/api/v1/eticket/follow-event",
+            {
+              event_id: this.event.id
+            },
+            {
+              headers: {
+                Authorization: token
+              }
+            }
+          )
+          .then(response => {
+            this.isLiked = true;
+            console.log("liked");
+          });
+      }
+    }
   }
 };
 </script>
@@ -261,7 +378,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   border-bottom: 1px solid #ccc;
-  height: 500px;
+  height: 60vh;
   z-index: -1;
 }
 .event__content {
