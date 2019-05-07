@@ -12,7 +12,7 @@
     <div class="list-wrapper">
       <!--news items-->
       <div class="post-card" v-for="post in posts" :key="post.id">
-        <nuxt-link :to="'/event/'+ post.id ">
+        <nuxt-link :to="'/event/'+ post.id_event ">
           <div
             :style="{backgroundImage: 'url(https://eticket-vhu.herokuapp.com' + post.imageURL +')'}"
             class="post-card__thumbnai"
@@ -20,7 +20,7 @@
             <div class="overlay"></div>
           </div>
         </nuxt-link>
-        <nuxt-link :to="'/event/'+ post.id ">
+        <nuxt-link :to="'/event/'+ post.id_event ">
           <div class="post-card__title">{{ post.title }}</div>
         </nuxt-link>
         <p class="post-card__des">{{ post.start_date}} - {{post.start_time}}:00</p>
