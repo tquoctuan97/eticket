@@ -3,7 +3,7 @@
     <v-content class="main-content">
       <Hero/>
       <div class="title-box center">
-        <h3>Lastest Event</h3>
+        <h3 class="headline">Lastest Event</h3>
         <a class="box-see-more" href="#">
           <span>See more</span>
           <v-icon>navigate_next</v-icon>
@@ -13,7 +13,7 @@
       <!--end list wrapper-->
       <!--list wrapper-->
       <div class="title-box center">
-        <h3>Upcomming in week</h3>
+        <h3 class="headline">Upcomming in week</h3>
         <a class="box-see-more" href="#">
           <span>See more</span>
           <v-icon>navigate_next</v-icon>
@@ -24,7 +24,7 @@
       <!--end list wrapper-->
       <!--list wrapper-->
       <div class="title-box center">
-        <h3>Free Entry</h3>
+        <h3 class="headline">Free Entry</h3>
         <a class="box-see-more" href="#">
           <span>See more</span>
           <v-icon>navigate_next</v-icon>
@@ -101,10 +101,6 @@ export default {
   padding: 20px 20px;
 }
 
-.title-box h3 {
-  font-size: 32px;
-}
-
 .box-see-more {
   font-size: 17px;
   padding: 10px;
@@ -160,6 +156,10 @@ export default {
   float: left;
   margin: 30px 0 10px 0;
   color: #000;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .post-card__time {
   position: absolute;
@@ -238,7 +238,12 @@ export default {
   height: auto;
   object-fit: cover;
 }
-
+@media (max-width: 1440px) {
+  .center {
+    width: 100vw;
+    overflow-x: hidden;
+  }
+}
 @media (max-width: 768px) {
   .post-card {
     width: calc(100%);

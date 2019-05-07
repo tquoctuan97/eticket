@@ -1,9 +1,9 @@
 <template>
-  <section class="mt-5 pa-5" style="background-color:#fff">
+  <section class="mt-5 pt-5 pb-5" style="background-color:#fff">
     <div class="title-box center">
-      <h3>Event Category</h3>
+      <h3 class="headline">Event Category</h3>
     </div>
-    <div class="list-wrapper center" style="justify-content: space-between">
+    <div class="list-wrapper center category-wrapper">
       <!--news items-->
       <div class="category_item">
         <img class="image-items" src="/ic_category/ic_music.png">
@@ -47,6 +47,9 @@ export default {};
 </script>
 
 <style>
+.category-wrapper {
+  justify-content: space-between !important;
+}
 .image-items {
   border-radius: 50%;
   overflow: hidden;
@@ -57,6 +60,7 @@ export default {};
 }
 .category_item {
   cursor: pointer;
+  width: calc(10%);
 }
 .category_item:hover .image-items {
   transform: translateY(-8px);
@@ -64,5 +68,19 @@ export default {};
 }
 .category_item:hover .image-items + * {
   color: #ff4d00;
+}
+@media (max-width: 768px) {
+  .category-wrapper {
+    justify-content: flex-start !important;
+  }
+  .image-items {
+    width: 70px !important;
+  }
+  .category_item {
+    width: calc(15%);
+    min-width: 75px;
+    margin: 10px;
+    height: auto !important;
+  }
 }
 </style>

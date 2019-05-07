@@ -29,12 +29,14 @@
       <div class="section-content">
         <div class="input-50">
           <v-text-field
+            prepend-icon="person"
             color="#ff9d72"
             label="First name"
             :disabled="!enableInputInfo"
             v-model="profileUser.first_name"
           ></v-text-field>
           <v-text-field
+            prepend-icon="person"
             color="#ff9d72"
             :disabled="!enableInputInfo"
             v-model="profileUser.last_name"
@@ -43,6 +45,7 @@
         </div>
         <div class="input-50">
           <v-select
+            prepend-icon="wc"
             color="#ff9d72"
             v-model="profileUser.gender"
             :disabled="!enableInputInfo"
@@ -50,6 +53,7 @@
             label="Gender"
           ></v-select>
           <v-text-field
+            prepend-icon="perm_contact_calendar"
             v-model="profileUser.dob"
             color="#ff9d72"
             label="D.O.B"
@@ -57,6 +61,7 @@
           ></v-text-field>
         </div>
         <v-textarea
+          prepend-icon="list_alt"
           color="#ff9d72"
           v-model="profileUser.bio"
           label="Bio"
@@ -74,6 +79,7 @@
 
             <v-card-text>
               <v-text-field
+                prepend-icon="lock"
                 color="#ff9d72"
                 label="New password"
                 type="password"
@@ -81,6 +87,7 @@
                 v-model="new_pass"
               ></v-text-field>
               <v-text-field
+                prepend-icon="lock"
                 color="#ff9d72"
                 label="Confirm new password"
                 type="password"
@@ -124,12 +131,14 @@
       <div class="section-content">
         <div class="input-28">
           <v-text-field
+            prepend-icon="store"
             color="#ff9d72"
             :disabled="!enableInputContact"
             v-model="profileUser.post_code"
             label="Post code"
           ></v-text-field>
           <v-text-field
+            prepend-icon="phone"
             color="#ff9d72"
             :disabled="!enableInputContact"
             v-model="profileUser.phone_number"
@@ -137,6 +146,7 @@
           ></v-text-field>
         </div>
         <v-text-field
+          prepend-icon="place"
           color="#ff9d72"
           label="Address"
           :disabled="!enableInputContact"
@@ -156,7 +166,13 @@
         <div>My wallet</div>
       </div>
       <div class="section-content">
-        <v-text-field color="#ff9d72" disabled v-model="profileUser.cash" label="Account balance"></v-text-field>
+        <v-text-field
+          prepend-icon="account_balance_wallet"
+          color="#ff9d72"
+          disabled
+          v-model="profileUser.cash"
+          label="Account balance"
+        ></v-text-field>
       </div>
     </section>
   </v-card-text>

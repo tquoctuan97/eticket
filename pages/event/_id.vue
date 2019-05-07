@@ -188,34 +188,6 @@
 import axios from "axios";
 
 export default {
-  demo: [
-    {
-      id: 6,
-      title: "CRAZY Water Festival - V Wave 2019",
-      address:
-        "2 Đinh Tiên Hoàng, Phường Đa Kao, Quận 1, Thành Phố Hồ Chí Minh",
-      locationName: "Sân vận động Hoa Lư",
-      owner: "AppsCyclone",
-      status: "Upcoming",
-      category: "Music",
-      contactNumber: "0971757297",
-      contactPerson: "HASONG MEDIS",
-      description:
-        "Lễ hội Songkran đã thu hút hàng triệu người trên thế giới háo hức đón chờ và quy tụ lại cùng hòa vào niềm vui của một năm mới. Lấy lễ hội này làm điểm chuẩn, dự án V-Wave mong muốn đem đến một mùa hè 2019 với những trải nghiệm mang tính toàn cầu lần đầu tiên có mặt tại Việt Nam: Crayz Water Festival 2019",
-      imageURL: "/eticket/assets/media/1554191988-6C242C.jpg",
-      type: "A half of day",
-      start_time: "0",
-      end_time: "24",
-      start_date: "2019-05-25 00:00:00",
-      end_date: "2019-05-26 00:00:00",
-      url: null,
-      created_at: {
-        date: "2019-04-02 07:59:48.000000",
-        timezone_type: 3,
-        timezone: "UTC"
-      }
-    }
-  ],
   data() {
     return {
       isLike: false,
@@ -225,8 +197,37 @@ export default {
   },
   methods: {
     onClickLike() {
-      console.log(this.tickets);
-      return (this.isLike = !this.isLike);
+      if (!this.isLike) {
+        axios
+          .post(
+            "https://eticket-vhu.herokuapp.com/api/v1/eticket/follow-event?event_id=" +
+              this.event.id,
+            {
+              headers: {
+                Authorization: "338c7505-371d-42da-8838-ac58fbdd1885"
+              }
+            }
+          )
+          .then(response => {
+            console.log(response.data);
+            this.isLike = true;
+          });
+      } else {
+        axios
+          .post(
+            "https://eticket-vhu.herokuapp.com/api/v1/eticket/un-follow-event?event_id=" +
+              this.event.id,
+            {
+              headers: {
+                Authorization: "338c7505-371d-42da-8838-ac58fbdd1885"
+              }
+            }
+          )
+          .then(response => {
+            console.log(response.data);
+            this.isLike = false;
+          });
+      }
     }
   },
   validate({ params }) {

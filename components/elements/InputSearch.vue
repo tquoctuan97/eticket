@@ -8,18 +8,18 @@
 
         <v-flex xs12 md4>
           <v-select
-            :items="items"
+            :items="category_items"
             label="Event Category"
             style="margin:0; padding:0;"
-            placeholder="All Event"
+            :value="category_items[0]"
           ></v-select>
         </v-flex>
         <v-flex xs12 md4>
           <v-select
-            :items="items"
+            :items="upcomming_items"
             label="Upcomming"
             style="margin:0; padding:0;"
-            placeholder="On Any Date"
+            :value="upcomming_items[0]"
           ></v-select>
         </v-flex>
         <v-flex style="margin:0; padding:0;">
@@ -45,7 +45,18 @@ import axios from "axios";
 export default {
   data: () => ({
     valid: false,
-    items: ["Foo", "Bar", "Fizz", "Buzz"],
+    category_items: [
+      "All Event",
+      "Music",
+      "Arts",
+      "Business",
+      "Parties",
+      "Classes",
+      "Sport",
+      "Food",
+      "Other"
+    ],
+    upcomming_items: ["On Any Date", "Today", "Tomorrow", "This Weekend"],
     posts: ""
   }),
   async asyncData() {
