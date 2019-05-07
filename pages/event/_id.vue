@@ -151,8 +151,10 @@
               <v-divider></v-divider>
             </v-card-text>
             <!-- Button Mua Ve -->
+
             <v-card-actions>
-              <v-dialog v-if="isBought==fasle" v-model="dialog_buyTicket" max-width="600px">
+              <!-- Chưa mua -->
+              <v-dialog v-if="isBought==false" v-model="dialog_buyTicket" max-width="600px">
                 <template v-slot:activator="{ on }">
                   <v-btn large block color="mycolor" dark v-on="on">GET TICKET NOW</v-btn>
                 </template>
@@ -170,6 +172,8 @@
                         :value="ticket.id"
                       ></v-radio>
                     </v-radio-group>
+                    <div v-if="messages==='Successfully'" style="color: #4CAF50">{{messages}}</div>
+                    <div v-else class="dialog-message" style="color: #FF5252">{{messages}}</div>
                   </v-card-text>
                   <v-card-actions>
                     <v-btn color="blue darken-1" flat @click="dialog_buyTicket = false">Close</v-btn>
@@ -178,29 +182,37 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
+              <!-- Đã mua -->
               <v-dialog v-else v-model="dialog_viewTicket" max-width="600px">
                 <template v-slot:activator="{ on }">
                   <v-btn large block color="success" dark v-on="on">VIEW YOUR TICKET</v-btn>
                 </template>
                 <v-card>
                   <v-card-title>
-                    <span class="headline">Buy ticket</span>
+                    <span class="headline">{{checkTicket.title}}</span>
                   </v-card-title>
                   <v-divider></v-divider>
                   <v-card-text>
-                    <v-radio-group v-model="radioGroup">
-                      <v-radio
-                        v-for="ticket in tickets"
-                        :key="ticket.id"
-                        :label="`${ticket.name} $${ticket.price}`"
-                        :value="ticket.id"
-                      ></v-radio>
-                    </v-radio-group>
+                    <VueQRCodeComponent :text="checkTicket.qr_code"/>
+                    <div class="event__information__item">
+                      <v-icon left>calendar_today</v-icon>
+                      <div>
+                        <p>{{checkTicket.start_date}}</p>
+                        <p>{{checkTicket.start_time}}:00 - {{checkTicket.end_time}}:00</p>
+                      </div>
+                    </div>
+                    <div class="event__information__item">
+                      <v-icon left>location_city</v-icon>
+                      <div>
+                        <p>{{checkTicket.locationName }}</p>
+                        <p>{{checkTicket.address}}</p>
+                      </div>
+                    </div>
                   </v-card-text>
                   <v-card-actions>
-                    <v-btn color="blue darken-1" flat @click="dialog_buyTicket = false">Close</v-btn>
-                    <v-spacer></v-spacer>
                     <v-btn dark color="error darken-1" @click="onBuyTicket">Ticket refund</v-btn>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" flat @click="dialog_viewTicket=false">Close</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -214,14 +226,20 @@
  
 <script>
 import axios from "axios";
+import VueQRCodeComponent from "vue-qrcode-component";
 
 export default {
+  components: {
+    VueQRCodeComponent
+  },
   data() {
     return {
       isLiked: "",
       isBought: "",
       dialog: false,
       dialog_buyTicket: false,
+      dialog_viewTicket: false,
+      messages: "",
       radioGroup: ""
     };
   },
