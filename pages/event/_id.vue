@@ -94,7 +94,7 @@
               <v-layout class="mt-2 mb-2">
                 <v-flex lg4>
                   <v-btn
-                    v-if="isSignIn==null"
+                    v-if="isSignIn==''"
                     flat
                     color
                     class="event__action__item"
@@ -103,13 +103,7 @@
                     <v-icon>favorite_border</v-icon>
                     <span>Like</span>
                   </v-btn>
-                  <v-btn
-                    v-if="isSignIn!=null"
-                    flat
-                    color
-                    class="event__action__item"
-                    @click="onClickLike"
-                  >
+                  <v-btn v-else flat color class="event__action__item" @click="onClickLike">
                     <v-icon v-if="isLiked">favorite</v-icon>
                     <v-icon v-else>favorite_border</v-icon>
                     <span v-if="isLiked">Liked</span>
@@ -233,7 +227,7 @@
                 <template v-slot:activator="{ on }">
                   <v-btn large block color="mycolor" dark v-on="on">GET TICKET NOW</v-btn>
                 </template>
-                <v-card v-if="isSignIn==null">
+                <v-card v-if="isSignIn==''">
                   <v-card-title>
                     <span class="headline">Buy ticket</span>
                   </v-card-title>
@@ -257,7 +251,7 @@
                     <v-btn dark color="mycolor" nuxt to="/account/sign-in">Please Sign In Before</v-btn>
                   </v-card-actions>
                 </v-card>
-                <v-card v-if="isSignIn!=null">
+                <v-card v-else>
                   <v-card-title>
                     <span class="headline">Buy ticket</span>
                   </v-card-title>
@@ -374,12 +368,12 @@ export default {
       };
     }
   },
+  created() {
+    if (this.$store.state.infoUser.access_token != null) {
+      this.isSignIn = true;
+    }
+  },
   computed: {
-    checkSignIn() {
-      if (this.$store.state.infoUser.access_token != null) {
-        isSignIn = true;
-      }
-    },
     checkTicket() {
       if (this.$store.state.infoUser.access_token != null) {
         let checkedTicket = this.eventTickets.find(
